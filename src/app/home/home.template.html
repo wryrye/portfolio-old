@@ -1,0 +1,20 @@
+<!--<div>-->
+  <!--{{name}}-->
+  <!--{{quest}}-->
+  <!--{{color}}-->
+<!--</div>-->
+
+<img class='world' src="../../assets/img/world2.png" >
+<img id = 'knight'  src="../../assets/img/knight.png" >
+<img id = 'gatekeeper'  src="../../assets/img/wizard.png" >
+<img id = 'close' c src="../../assets/img/close.png" (click)="closeStuff()">
+
+<div>
+  <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
+  <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
+  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (otherRequest) = "colorToNext()" [quest]="this.quest"></color-select>
+</div>
+
+<canvas id = 'theCanvas'></canvas>
+<!--<container  class = "container" id="pageContainer" >  </container>-->
+

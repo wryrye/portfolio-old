@@ -1,0 +1,135 @@
+#name{
+  z-index: 3;
+  position: absolute;
+  opacity: 0;
+}
+
+#quest{
+  z-index: 2;
+  position: absolute;
+  opacity: 0;
+}
+
+#color{
+  z-index: 1;
+  position: absolute;
+  opacity: 0;
+}
+
+.center{
+  width:60%;
+  text-align: center;
+  left: 40%
+}
+
+.world{
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.fadeout{
+  animation-name: fadeout;
+  animation-duration: 2s;
+
+}
+
+@keyframes fadeout {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+.fadein{
+  animation-name: fadein;
+  animation-duration: 3s;
+
+}
+
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+@keyframes crossBridge {
+  0% {left: 21%;
+    transform: none;}
+  30% {left:21%;
+    transform: none;}
+  65% {left: 110%;
+    transform: none;}
+  66%{
+    transform: scaleX(-1);
+  }
+  100% {left: 21%;
+    transform: scaleX(-1)}
+}
+
+@keyframes moveOnScreen {
+  0% {left: -25%;}
+  25% {left: -25%;}
+  100% {left: 21%;}
+}
+
+#knight{
+  z-index: 1;
+  transform: none;
+  animation:moveOnScreen;
+  animation-duration: 3s;
+  position: absolute;
+  width: 20%;
+  height: 36.5%;
+  left: 21%;
+  top:45.5%;
+
+}
+
+#gatekeeper{
+  z-index: 1;
+  position: absolute;
+  width: 13%;
+  height: 25.5%;
+  left: 68%;
+  top:55.5%;
+}
+
+.container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+@keyframes grow {
+  0% {
+    width: 0%;
+    height: 0%;
+    top:425px;
+    left:33%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0%;
+  }
+}
+
+
+#theCanvas{
+  position: relative;
+  animation-duration: 6s;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  z-index: 2;
+}
+
+#close{
+  width: 5%;
+  left:95%;
+  position: absolute;
+  visibility: hidden;
+  z-index: 3;
+  cursor: pointer;
+}
+
