@@ -37,6 +37,7 @@ export class Home  {
   name: string;
   quest: string;
   color: string;
+  count: number;
 
   constructor() {}
   // name = 'Name';
@@ -54,23 +55,26 @@ export class Home  {
 
 
   ngAfterViewInit(){
-    var count = 0;
+    this.count = 0;
+    console.log(this.count);
     $("#knight")
       .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-        function(e){
-        if(count==0){
+        jQuery.proxy(function(e){
+        console.log(this.count);
+        if(this.count==0){
           document.getElementById('name').className ='fadein center';
           document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
+          // document.getElementById('name').style.visibility = 'visible'; //JS DOM Manipulation
         }
 
-        if(count == 1) {
+        if(this.count == 1) {
           $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
           $("#theCanvas").css("animation-name", "grow");
           $("#theCanvas").css("animation-duration", "2s");
         }
-          count++;
-           $(this).off(e);
-        });
+          this.count++;
+           // $(this).off(e);
+        },this));
 
     $("#theCanvas")
       .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
@@ -116,6 +120,9 @@ export class Home  {
     document.getElementById('color').className ='fadein center';
     document.getElementById('color').style.opacity = '1';
     this.quest = this.questSelectComponent.quest;
+
+    $("#knight").css("animation","toggle");
+    $("#theCanvas").css("animation-name", "toggle");
   }
 
   colorToNext(){
@@ -177,7 +184,25 @@ export class Home  {
   closeStuff(){
     $("#theCanvas").css("visibility","hidden");
     $("#close").css("visibility","hidden");
+    document.getElementById('name').style.visibility = 'hidden';
+    document.getElementById('quest').style.visibility = 'hidden';
+    document.getElementById('color').style.visibility = 'hidden';
+    $("#replay").css("visibility","visible");
+    document.getElementById('replay').className ='fadein center oldstyle';
   }
 
+  replay(){
+    this.count=1;
+    console.log("here");
+    document.getElementById('name').className ='fadein center';
+    document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
+    document.getElementById('name').style.visibility = 'visible';
+    document.getElementById('quest').style.visibility = 'visible';
+    document.getElementById('color').style.visibility = 'visible';
+    document.getElementById('name').style.zIndex = '3';
+    document.getElementById('quest').style.zIndex = '2';
+    document.getElementById('color').style.zIndex = '1';
+    $("#replay").css("visibility","hidden");
+  }
 
 }

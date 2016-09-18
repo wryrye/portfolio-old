@@ -38,9 +38,30 @@
   top: 53%;
 }
 
+@keyframes shine {
+  /*0% {transform: skewX(-5deg);transform: skewY(-5deg);}*/
+  /*50% {transform: skewX(5deg);transform: skewY(5deg);}*/
+  /*100%{transform: skewX(-5deg);transform: skewY(-5deg);}*/
+  0% {transform: rotate(5deg);transform: skewY(-5deg);}
+  55% {transform: rotate(-5deg);transform: skewY(5deg);}
+  100% {transform: rotate(5deg);transform: skewY(-5deg);}
+}
+
+
+#sun{
+  z-index: -1;
+  position: absolute;
+  width: 20%;
+  height: 40%;
+  animation-name: shine;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  transform: rotate(5deg);
+}
+
 .fadeout{
   animation-name: fadeout;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
 
 }
 
@@ -51,7 +72,7 @@
 
 .fadein{
   animation-name: fadein;
-  animation-duration: 3s;
+  animation-duration: 1.5s;
 
 }
 
@@ -162,3 +183,15 @@
   cursor: pointer;
 }
 
+#replay{
+  position: absolute;
+  top:10%;
+  height:10%;
+  font-size: 3em;
+  width:60%;
+  text-align: center;
+  left: 40%;
+  visibility: hidden;
+  cursor:pointer;
+
+}

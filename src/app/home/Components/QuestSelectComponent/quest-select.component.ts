@@ -15,13 +15,14 @@ export class QuestSelectComponent {
   @Input()
   quest: string;
   switchRequest:any;
+  firstTime:any;
 
   constructor() {
     this.switchRequest = new EventEmitter();
   }
 
   ngOnInit() {
-
+  this.firstTime = true;
   }
 
   ngOnChanges(){
@@ -29,8 +30,10 @@ export class QuestSelectComponent {
   }
 
   selectQuest(quest){
-    this.quest = quest;
-    this.switchToColor();
+    if(this.firstTime) {
+      this.quest = quest;
+      this.switchToColor();
+    }
   }
 
   switchToColor(){
