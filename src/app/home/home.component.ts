@@ -131,6 +131,7 @@ export class Home  {
 
   showResume(){
     this.colorToNext()
+    //noinspection TypeScriptUnresolvedFunction
     var pdfjsLib = require('pdfjs-dist/build/pdf.js');
     var pdfPath = '../../assets/docs/Ryan Coughlin Resume.pdf';
     pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";

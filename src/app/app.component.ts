@@ -4,6 +4,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { AppState } from './app.service';
+//noinspection TypeScriptUnresolvedFunction
 var $ = require('jquery');
 /*
  * App Component
