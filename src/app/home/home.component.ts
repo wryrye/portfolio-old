@@ -24,9 +24,7 @@ import {PageScroll} from 'ng2-page-scroll'
   pipes: [ ],
   styleUrls: [ './home.style.css' ],
   templateUrl: './home.template.html',
-  plugins:[
 
-  ]
 })
 
 export class Home  {
@@ -153,12 +151,10 @@ export class Home  {
         var canvas = document.getElementById('theCanvas');
 
          var viewport = pdfPage.getViewport(3.0);
-        //noinspection TypeScriptUnresolvedVariable
-        canvas.width = viewport.width;
-        //noinspection TypeScriptUnresolvedVariable
-        canvas.height = viewport.height;
-        //noinspection TypeScriptUnresolvedFunction
-        var ctx = canvas.getContext('2d');
+
+        (<HTMLInputElement>canvas).width = viewport.width;
+        (<HTMLInputElement>canvas).height = viewport.height;
+        var ctx = (<HTMLCanvasElement> canvas).getContext('2d');
         var renderTask = pdfPage.render({
           canvasContext: ctx,
           viewport: viewport
