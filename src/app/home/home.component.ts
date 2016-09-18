@@ -7,9 +7,6 @@ import {QuestSelectComponent} from "./Components/QuestSelectComponent/quest-sele
 import {ColorSelectComponent} from "./Components/ColorSelectComponent/color-select.component";
 import 'pdfjs-dist';
 import {PageScroll} from 'ng2-page-scroll'
-import {BehaviorSubject} from "rxjs";
-// var $ = require('jquery');
-declare var $:JQueryStatic;
 
 
 @Component({
@@ -84,14 +81,8 @@ export class Home  {
           $("#boss").css("overflow", "scroll");
 
 
-          $(this).off(e);
+          //$(this).off(e);
         });
-
-    $("#close")
-      .on("click",
-        function(e){
-          $("#boss").css("overflow", "hidden");
-          });
 
 
 }
@@ -184,6 +175,7 @@ export class Home  {
   closeStuff(){
     $("#theCanvas").css("visibility","hidden");
     $("#close").css("visibility","hidden");
+    $("#boss").css("overflow", "hidden");
     document.getElementById('name').style.visibility = 'hidden';
     document.getElementById('quest').style.visibility = 'hidden';
     document.getElementById('color').style.visibility = 'hidden';

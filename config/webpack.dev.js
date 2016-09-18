@@ -10,6 +10,7 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
  * Webpack Plugins
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 /**
  * Webpack Constants
@@ -96,6 +97,12 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
+
+    new ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    }),
 
     /**
      * Plugin: DefinePlugin
