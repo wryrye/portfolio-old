@@ -39,9 +39,6 @@
 }
 
 @keyframes shine {
-  /*0% {transform: skewX(-5deg);transform: skewY(-5deg);}*/
-  /*50% {transform: skewX(5deg);transform: skewY(5deg);}*/
-  /*100%{transform: skewX(-5deg);transform: skewY(-5deg);}*/
   0% {transform: rotate(5deg);transform: skewY(-5deg);}
   55% {transform: rotate(-5deg);transform: skewY(5deg);}
   100% {transform: rotate(5deg);transform: skewY(-5deg);}
@@ -107,11 +104,11 @@
   73%{
     top: 23%;
   }
-  78%{
+  82%{
     top: 43%;
   }
   100% {
-    left: 21%;
+    left: 35%;
     transform: scaleX(-1);
   }
 }
@@ -123,7 +120,7 @@
 }
 
 #knight{
-  z-index: 1;
+  z-index: 2;
   transform: none;
   animation:moveOnScreen;
   animation-duration: 3s;
@@ -133,6 +130,14 @@
   left: 21%;
   top:43%;
 
+}
+
+@keyframes backUp {
+    0% {transform:scale(1,1);}
+    100% {transform: scale(0,0);}
+
+    /*0%{top: 53%}*/
+    /*100%{top: 20%}*/
 }
 
 #gatekeeper{
@@ -151,16 +156,18 @@
 }
 @keyframes grow {
   0% {
-    width: 0%;
-    height: 0%;
-    top:425px;
-    left:33%;
+    /*width: 0%;*/
+    /*height: 0%;*/
+    /*top:425px;*/
+    /*left:33%;*/
+      transform: scale(0,0);
   }
   100% {
-    width: 100%;
-    height: 100%;
-    top:0px;
-    left:0%;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*top:0px;*/
+    /*left:0%;*/
+      transform: scale(1,1);
   }
 }
 
@@ -172,6 +179,11 @@
   height: 100%;
   visibility: hidden;
   z-index: 2;
+
+    /*width: 0%;*/
+    /*height: 0%;*/
+    /*top:425px;*/
+    /*left:33%;*/
 }
 
 #close{
@@ -193,5 +205,21 @@
   left: 40%;
   visibility: hidden;
   cursor:pointer;
+
+}
+@keyframes explode {
+    0%{opacity:1; }
+    30%{opacity:1; }
+    100%{opacity:0; }
+}
+
+#poof{
+    z-index: 1;
+    opacity: 0;
+    position: absolute;
+    width: 36%;
+    height: 65%;
+    left: 49%;
+    top:45%;
 
 }

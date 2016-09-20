@@ -32,7 +32,7 @@ export class Home  {
   name: string;
   quest: string;
   color: string;
-  count: number;
+  knightCount: number;
 
   constructor() {}
   // name = 'Name';
@@ -50,25 +50,25 @@ export class Home  {
 
 
   ngAfterViewInit(){
-    this.count = 0;
-    console.log(this.count);
+    this.knightCount = 0;
+
+    console.log(this.knightCount);
     $("#knight")
       .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
         jQuery.proxy(function(e){
-        console.log(this.count);
-        if(this.count==0){
+        console.log(this.knightCount);
+        //when knight enters window
+        if(this.knightCount==0){
           document.getElementById('name').className ='fadein center';
           document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
-          // document.getElementById('name').style.visibility = 'visible'; //JS DOM Manipulation
         }
-
-        if(this.count == 1) {
+        //when night retreives resume
+        if(this.knightCount == 1) {
           $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
           $("#theCanvas").css("animation-name", "grow");
           $("#theCanvas").css("animation-duration", "2s");
         }
-          this.count++;
-           // $(this).off(e);
+          this.knightCount++;
         },this));
 
     $("#theCanvas")
@@ -76,11 +76,29 @@ export class Home  {
         function(e){
           $("#close").css("visibility","visible");
           $("#knight").css("transform","none");
+          $("#knight").css("left","21%");
+          $("#gatekeeper").css("visibility","visible");
+          $("#poof").css("animation","toggle");
           $("#boss").css("overflow", "scroll");
-
-
-          //$(this).off(e);
         });
+
+
+    $("#color")
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+            jQuery.proxy(function(e){
+                        if($("#color").css("opacity") == "0"  ) {
+                $("#poof").css("animation", "explode");
+                $("#poof").css("animation-duration", "1.5s");
+                $("#gatekeeper").css("visibility", "hidden");
+
+                $("#knight").css("animation", "crossBridge");
+                $("#knight").css("animation-duration", "6s");
+                $("#knight").css("transform", "scaleX(-1)");
+                $("#knight").css("left", "35%");
+            }
+            },this));
+
+
 
 
 }
@@ -118,9 +136,10 @@ export class Home  {
     document.getElementById('color').className ='fadeout center';
     document.getElementById('color').style.opacity = '0';
     document.getElementById('color').style.zIndex = '0';
-    $("#knight").css("animation","crossBridge");
-    $("#knight").css("animation-duration","6s");
-    $("#knight").css("transform","scaleX(-1)");
+
+    // $("#knight").css("animation","crossBridge");
+    // $("#knight").css("animation-duration","6s");
+    // $("#knight").css("transform","scaleX(-1)");
 
     this.color = this.colorSelectComponent.color;
   }
@@ -142,10 +161,6 @@ export class Home  {
       // Request a first page
       return pdfDocument.getPage(1).then(function (pdfPage) {
         // Display page on the existing canvas with 100% scale.
-
-
-
-
 
         //var viewport = pdfPage.getViewport(1);
         var canvas = document.getElementById('theCanvas');
@@ -180,7 +195,7 @@ export class Home  {
   }
 
   replay(){
-    this.count=1;
+    this.knightCount=1;
     console.log("here");
     document.getElementById('name').className ='fadein center';
     document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
