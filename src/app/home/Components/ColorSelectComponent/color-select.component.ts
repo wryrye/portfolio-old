@@ -33,12 +33,19 @@ export class ColorSelectComponent {
 
   selectColor(color){
     this.color = color;
-    if(this.quest == 'resume'){
-      this.switchToResume();
+    if(color =="launch"){
+      this.switchToOther()
     }
     else{
-      this.switchToOther();
+      this.switchToResume();
     }
+
+    // if(this.quest == 'resume'){
+    //   this.switchToResume();
+    // }
+    // else{
+    //   this.switchToOther();
+    // }
   }
 
   switchToResume(){

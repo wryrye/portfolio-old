@@ -119,6 +119,18 @@
   100% {left: 21%;}
 }
 
+@keyframes moveOnScreen2 {
+  0% {left: -25%;}
+  25% {left: -25%;}
+  100% {left: 21%;}
+}
+
+
+@keyframes launch {
+  0%{top:43%;}
+  100%{top:-80%;}
+}
+
 #knight{
   z-index: 2;
   transform: none;

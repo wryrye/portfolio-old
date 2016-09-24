@@ -54,39 +54,49 @@ export class Home  {
 
     console.log(this.knightCount);
     $("#knight")
-      .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-        jQuery.proxy(function(e){
-        console.log(this.knightCount);
-        //when knight enters window
-        if(this.knightCount==0){
-          document.getElementById('name').className ='fadein center';
-          document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
-        }
-        //when night retreives resume
-        if(this.knightCount == 1) {
-          $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
-          $("#theCanvas").css("animation-name", "grow");
-          $("#theCanvas").css("animation-duration", "2s");
-        }
-          this.knightCount++;
-        },this));
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+            jQuery.proxy(function(e){
+              if($("#knight").css("animation-name") == "launch"  ){
+                $("#knight").css("animation-name","moveOnScreen2");
+                this.knightCount=1;
+              }
+              if($("#knight").css("animation-name") == "moveOnScreen2"  ){
+
+              }
+              else {
+                console.log(this.knightCount);
+                //when knight enters window
+                if (this.knightCount == 0) {
+                  document.getElementById('name').className = 'fadein center';
+                  document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
+                }
+                //when night retreives resume
+                if (this.knightCount == 1) {
+                  $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
+                  $("#theCanvas").css("animation-name", "grow");
+                  $("#theCanvas").css("animation-duration", "2s");
+                }
+                this.knightCount++;
+              }
+
+            },this));
 
     $("#theCanvas")
-      .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-        function(e){
-          $("#close").css("visibility","visible");
-          $("#knight").css("transform","none");
-          $("#knight").css("left","21%");
-          $("#gatekeeper").css("visibility","visible");
-          $("#poof").css("animation","toggle");
-          $("#boss").css("overflow", "scroll");
-        });
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+            function(e){
+              $("#close").css("visibility","visible");
+              $("#knight").css("transform","none");
+              $("#knight").css("left","21%");
+              $("#gatekeeper").css("visibility","visible");
+              $("#poof").css("animation","toggle");
+              $("#boss").css("overflow", "scroll");
+            });
 
 
     $("#color")
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
             jQuery.proxy(function(e){
-                        if($("#color").css("opacity") == "0"  ) {
+              if($("#color").css("opacity") == "0"  ) {
                 $("#poof").css("animation", "explode");
                 $("#poof").css("animation-duration", "1.5s");
                 $("#gatekeeper").css("visibility", "hidden");
@@ -95,13 +105,16 @@ export class Home  {
                 $("#knight").css("animation-duration", "6s");
                 $("#knight").css("transform", "scaleX(-1)");
                 $("#knight").css("left", "35%");
-            }
+              }
             },this));
 
+    $("#loaded")
+        .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+            jQuery.proxy(function(e){
+              $("#loaded").css("visibility", "hidden");
+            },this));
 
-
-
-}
+  }
 
   ngOnInit() {
 
@@ -165,7 +178,7 @@ export class Home  {
         //var viewport = pdfPage.getViewport(1);
         var canvas = document.getElementById('theCanvas');
 
-         var viewport = pdfPage.getViewport(3.0);
+        var viewport = pdfPage.getViewport(3.0);
 
         (<HTMLInputElement>canvas).width = viewport.width;
         (<HTMLInputElement>canvas).height = viewport.height;
@@ -206,6 +219,11 @@ export class Home  {
     document.getElementById('quest').style.zIndex = '2';
     document.getElementById('color').style.zIndex = '1';
     $("#replay").css("visibility","hidden");
+  }
+
+  launch(){
+    $("#knight").css("animation", "launch");
+    $("#knight").css("animation-duration", "2s");
   }
 
 }

@@ -4,6 +4,7 @@
   <!--{{color}}-->
 <!--</div>-->
 
+<img id= 'loaded' src="../../assets/img/monty_python_title.png" >
 <img id='world' src="../../assets/img/world7.png" >
 <img id = 'bridge'  src="../../assets/img/bridge.png" >
 <img id = 'sun'  src="../../assets/img/sun2.png" >
@@ -16,7 +17,7 @@
 <div>
   <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
   <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
-  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (otherRequest) = "colorToNext()" [quest]="this.quest"></color-select>
+  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (otherRequest) = "launch()" [quest]="this.quest"></color-select>
 </div>
 
 <canvas id = 'theCanvas'></canvas>
