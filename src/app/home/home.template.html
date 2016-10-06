@@ -10,14 +10,14 @@
 <img id = 'sun'  src="../../assets/img/sun2.png" >
 <img id = 'knight'  src="../../assets/img/knight.png" >
 <img id = 'gatekeeper'  src="../../assets/img/wizard3.png" >
-<img id = 'close' c src="../../assets/img/close.png" (click)="closeStuff()">
+<img id = 'close' c src="../../assets/img/close.png" (click)="closeResume()">
 <div id = 'replay' class ='oldstyle' (click)="replay()">Play Again!</div>
 <img id= 'poof' src="../../assets/img/poof1.png" >
 
 <div>
   <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
   <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
-  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (otherRequest) = "launch()" [quest]="this.quest"></color-select>
+  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (launchRequest) = "launch()" [quest]="this.quest"></color-select>
 </div>
 
 <canvas id = 'theCanvas'></canvas>

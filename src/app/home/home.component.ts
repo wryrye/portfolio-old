@@ -1,5 +1,4 @@
 import {Component, ViewChild, Input} from '@angular/core';
-import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLarge } from './x-large';
 import { NameSelectComponent} from  './Components/NameSelectComponent/name-select.component'
@@ -32,13 +31,10 @@ export class Home  {
   name: string;
   quest: string;
   color: string;
-  knightCount: number;
 
   constructor() {}
-  // name = 'Name';
 
-
-
+  //can access child methods and fields
   @ViewChild(NameSelectComponent)
   private nameSelectComponent: NameSelectComponent;
 
@@ -50,82 +46,70 @@ export class Home  {
 
 
   ngAfterViewInit(){
-    this.knightCount = 0;
 
-    console.log(this.knightCount);
+    //use CSS animation endings for signalling/transitioning
     $("#knight")
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
             jQuery.proxy(function(e){
-              if($("#knight").css("animation-name") == "launch"  ){
-                $("#knight").css("animation-name","moveOnScreen2");
-                this.knightCount=1;
-              }
-              if($("#knight").css("animation-name") == "moveOnScreen2"  ){
-
-              }
-              else {
-                console.log(this.knightCount);
-                //when knight enters window
-                if (this.knightCount == 0) {
-                  document.getElementById('name').className = 'fadein center';
-                  document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
-                }
-                //when night retreives resume
-                if (this.knightCount == 1) {
-                  $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
-                  $("#theCanvas").css("animation-name", "grow");
-                  $("#theCanvas").css("animation-duration", "2s");
-                }
-                this.knightCount++;
+              if($("#knight").css("animation-name") == "launch"){ //when knight gets launched...
+                $("#knight").css("animation-name","moveOnScreen2"); //move knight back on screen
               }
 
+              if ($("#knight").css("animation-name") == "moveOnScreen") { //when knight enters window 1st time...
+                document.getElementById('name').className = 'fadein center'; // fade in first question
+                document.getElementById('name').style.opacity = '1'; //and make it stay opaque
+              }
+
+              if ($("#knight").css("animation-name") == "crossBridge") {//when night retreives resume...
+                $("#theCanvas").css("visibility", "visible");  //make canvas visible
+                $("#theCanvas").css("animation-name", "grow");// and expand it
+                $("#theCanvas").css("animation-duration", "2s");
+
+                $("#name").css("visibility", "hidden");  //and hide the question elements
+                $("#quest").css("visibility", "hidden");
+                $("#color").css("visibility", "hidden");
+              }
+              //note: jQuery.proxy allows reference to 'this'
             },this));
 
     $("#theCanvas")
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-            function(e){
-              $("#close").css("visibility","visible");
-              $("#knight").css("transform","none");
-              $("#knight").css("left","21%");
-              $("#gatekeeper").css("visibility","visible");
-              $("#poof").css("animation","toggle");
-              $("#boss").css("overflow", "scroll");
+            function(e){ //when resume expands completely
+              $("#close").css("visibility","visible"); //show close button
+              $("#knight").css("transform","none"); //toggle-reset knight animation
+              $("#knight").css("left","21%"); //and position
+              $("#gatekeeper").css("visibility","visible"); //show gatekeeper
+              $("#poof").css("animation","toggle"); //toggle-reset poof cloud
+              $("#boss").css("overflow", "scroll"); //enable scrolling
             });
 
 
     $("#color")
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
             jQuery.proxy(function(e){
-              if($("#color").css("opacity") == "0"  ) {
-                $("#poof").css("animation", "explode");
+              if($("#color").css("opacity") == "0"  ) { //when color question fades out (wait for 2nd animation with opacity check)
+                $("#poof").css("animation", "explode"); //explode the poof
                 $("#poof").css("animation-duration", "1.5s");
-                $("#gatekeeper").css("visibility", "hidden");
+                $("#gatekeeper").css("visibility", "hidden");//gatekeeper apparates!
 
-                $("#knight").css("animation", "crossBridge");
+                $("#knight").css("animation", "crossBridge"); //knight crosses the bridge
                 $("#knight").css("animation-duration", "6s");
-                $("#knight").css("transform", "scaleX(-1)");
+                $("#knight").css("transform", "scaleX(-1)"); //and turns around
                 $("#knight").css("left", "35%");
               }
             },this));
 
     $("#loaded")
         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-            jQuery.proxy(function(e){
-              $("#loaded").css("visibility", "hidden");
+            jQuery.proxy(function(e){ //when loading is done and animation ends
+              $("#loaded").css("visibility", "hidden"); //remember to hide loading page
             },this));
 
   }
 
-  ngOnInit() {
+  //used some Document below in place of jQuery for DOM manipulation
 
-  }
-
-  ngOnChanges(){
-
-  }
-
-
-  nameToQuest(){
+  nameToQuest(){ //fade out name question and fadein quest question
     document.getElementById('name').className ='fadeout center';
     document.getElementById('name').style.opacity = '0';
     document.getElementById('name').style.zIndex = '0';
@@ -133,7 +117,7 @@ export class Home  {
     document.getElementById('quest').style.opacity = '1';
     this.name = this.nameSelectComponent.name;
   }
-  questToColor(){
+  questToColor(){ //fade out quest question and fadein color question
     document.getElementById('quest').className ='fadeout center';
     document.getElementById('quest').style.opacity = '0';
     document.getElementById('quest').style.zIndex = '0';
@@ -141,22 +125,19 @@ export class Home  {
     document.getElementById('color').style.opacity = '1';
     this.quest = this.questSelectComponent.quest;
 
+    //convenient spot to toggle animations to be set in the future
     $("#knight").css("animation","toggle");
     $("#theCanvas").css("animation-name", "toggle");
   }
 
-  colorToNext(){
+  colorToNext(){//fade out color question and move on to next action
     document.getElementById('color').className ='fadeout center';
     document.getElementById('color').style.opacity = '0';
     document.getElementById('color').style.zIndex = '0';
-
-    // $("#knight").css("animation","crossBridge");
-    // $("#knight").css("animation-duration","6s");
-    // $("#knight").css("transform","scaleX(-1)");
-
     this.color = this.colorSelectComponent.color;
   }
 
+  //shows Resume
   showResume(){
     this.colorToNext()
     //noinspection TypeScriptUnresolvedFunction
@@ -195,20 +176,17 @@ export class Home  {
   }
 
 
-
-  closeStuff(){
-    $("#theCanvas").css("visibility","hidden");
-    $("#close").css("visibility","hidden");
-    $("#boss").css("overflow", "hidden");
-    document.getElementById('name').style.visibility = 'hidden';
-    document.getElementById('quest').style.visibility = 'hidden';
-    document.getElementById('color').style.visibility = 'hidden';
-    $("#replay").css("visibility","visible");
-    document.getElementById('replay').className ='fadein center oldstyle';
+  //closes Resume
+  closeResume(){
+    $("#theCanvas").css("visibility","hidden"); //hides resume canvas
+    $("#close").css("visibility","hidden"); //hides close button
+    $("#boss").css("overflow", "hidden"); //disables scroll
+    $("#replay").css("visibility","visible"); //show replay button
+    document.getElementById('replay').className ='fadein center oldstyle'; //and style it
   }
 
+  //reset game to initial values
   replay(){
-    this.knightCount=1;
     console.log("here");
     document.getElementById('name').className ='fadein center';
     document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
@@ -221,6 +199,7 @@ export class Home  {
     $("#replay").css("visibility","hidden");
   }
 
+  //launch knight into the abyss when he lies about his own favorite color?!
   launch(){
     $("#knight").css("animation", "launch");
     $("#knight").css("animation-duration", "2s");
