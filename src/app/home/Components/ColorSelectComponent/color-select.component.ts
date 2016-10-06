@@ -8,7 +8,7 @@ import {Component, Input, EventEmitter} from '@angular/core';
     pipes: [ ],
     styleUrls: ['./color-select.style.css'],
     templateUrl: './color-select.html',
-    events : ['resumeRequest','launchRequest']
+    events : ['resumeRequest','launchRequest','essayRequest']
 })
 
 export class ColorSelectComponent {
@@ -17,10 +17,12 @@ export class ColorSelectComponent {
     quest: string;
     resumeRequest:any;
     launchRequest: any;
+    essayRequest: any;
 
     constructor() {
         this.resumeRequest = new EventEmitter();
         this.launchRequest = new EventEmitter();
+        this.essayRequest = new EventEmitter();
     }
 
     ngOnInit() {
@@ -32,14 +34,20 @@ export class ColorSelectComponent {
     }
 
     selectColor(color){
-        this.color = color;
+        console.log(this.quest)
 
         if(color =="launch"){
             this.launchKnight()
         }
         else{
-            $("#boss").css("cursor","url(../../../../assets/img/"+color+"sword.png), auto")
-            this.switchToResume();
+            $("#boss").css("cursor","url(../../../../assets/img/"+color+"sword.png), auto");
+            if(this.quest == 'essay'){
+                this.switchToEssay();
+
+            }
+            else{
+                this.switchToResume();
+            }
         }
 
     }
@@ -47,6 +55,11 @@ export class ColorSelectComponent {
     switchToResume(){
         console.log('switching to resume...')
         this.resumeRequest.emit();
+    }
+
+    switchToEssay(){
+        console.log('switching to essay...')
+        this.essayRequest.emit();
     }
     launchKnight(){
         console.log('3..2..1.. launching!')

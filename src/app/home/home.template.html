@@ -17,7 +17,7 @@
 <div>
   <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
   <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
-  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (launchRequest) = "launch()" [quest]="this.quest"></color-select>
+  <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (essayRequest) = "showEssay()" (launchRequest) = "launch()"  [quest]="this.quest"></color-select>
 </div>
 
 <canvas id = 'theCanvas'></canvas>

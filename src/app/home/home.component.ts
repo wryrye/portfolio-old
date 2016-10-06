@@ -89,6 +89,10 @@ export class Home  {
             jQuery.proxy(function(e){
               if($("#color").css("opacity") == "0"  ) { //when color question fades out (wait for 2nd animation with opacity check)
                 $("#poof").css("animation", "explode"); //explode the poof
+
+                $("#boss").css("animation", "blur");
+                $("#boss").css("animation-duration", ".5s");
+
                 $("#poof").css("animation-duration", "1.5s");
                 $("#gatekeeper").css("visibility", "hidden");//gatekeeper apparates!
 
@@ -104,6 +108,7 @@ export class Home  {
             jQuery.proxy(function(e){ //when loading is done and animation ends
               $("#loaded").css("visibility", "hidden"); //remember to hide loading page
             },this));
+
 
   }
 
@@ -128,6 +133,7 @@ export class Home  {
     //convenient spot to toggle animations to be set in the future
     $("#knight").css("animation","toggle");
     $("#theCanvas").css("animation-name", "toggle");
+    $("#boss").css("animation-name", "toggle");
   }
 
   colorToNext(){//fade out color question and move on to next action
@@ -153,6 +159,46 @@ export class Home  {
     var loadingTask = pdfjsLib.getDocument(pdfPath);
     loadingTask.promise.then(function (pdfDocument) {
       // Request a first page
+      return pdfDocument.getPage(1).then(function (pdfPage) {
+        // Display page on the existing canvas with 100% scale.
+
+        //var viewport = pdfPage.getViewport(1);
+        var canvas = document.getElementById('theCanvas');
+
+        var viewport = pdfPage.getViewport(3.0);
+
+        (<HTMLInputElement>canvas).width = viewport.width;
+        (<HTMLInputElement>canvas).height = viewport.height;
+        var ctx = (<HTMLCanvasElement> canvas).getContext('2d');
+        var renderTask = pdfPage.render({
+          canvasContext: ctx,
+          viewport: viewport
+        });
+        return renderTask.promise;
+      });
+    }).catch(function (reason) {
+      console.error('Error: ' + reason);
+    });
+  }
+
+  showEssay(){
+    this.colorToNext()
+    //noinspection TypeScriptUnresolvedFunction
+    var pdfjsLib = require('pdfjs-dist/build/pdf.js');
+    var pdfPath = '../../assets/docs/chinessay.pdf';
+    pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
+    var loadingTask = pdfjsLib.getDocument(pdfPath);
+    console.log(loadingTask);
+
+    var PAGE_TO_VIEW = 1;
+    var SCALE = 1.0;
+
+    var loadingTask = pdfjsLib.getDocument(pdfPath);
+    loadingTask.promise.then(function (pdfDocument) {
+      // Request a first page
+
+
+
       return pdfDocument.getPage(1).then(function (pdfPage) {
         // Display page on the existing canvas with 100% scale.
 
