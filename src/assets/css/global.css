@@ -56,9 +56,10 @@ body{
     height: 100%;
 }
 
-@keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0;}
+@keyframes fadeout2 {
+    0% {opacity: 1;}
+    75%{opacity: 1;}
+    100% {opacity: 0;}
 }
 
 #loaded{
@@ -66,7 +67,7 @@ body{
     position: absolute;
     width: 100%;
     height: 100%;
-    animation: fadeout;
+    animation: fadeout2;
     animation-duration:3s;
 }
 

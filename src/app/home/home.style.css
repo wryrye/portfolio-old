@@ -1,25 +1,37 @@
 #name{
     z-index: 3;
-    position: absolute;
     opacity: 0;
+    animation-duration: 1.5s;
 }
 
 #quest{
     z-index: 2;
-    position: absolute;
     opacity: 0;
+    animation-duration: 1.5s;
 }
 
 #color{
     z-index: 1;
-    position: absolute;
     opacity: 0;
+    animation-duration: 1.5s;
 }
 
 .center{
     width:60%;
     text-align: center;
-    left: 40%
+    position: absolute;
+    left: 35%;
+    top:10%;
+}
+
+#speech{
+    position: absolute;
+    left: 30%;
+    width:70%;
+    height:60%;
+    opacity: 0;
+    animation-duration: 1.5s;
+
 }
 
 #world{
@@ -56,21 +68,9 @@
     transform: rotate(5deg);
 }
 
-.fadeout{
-    animation-name: fadeout;
-    animation-duration: 1.5s;
-
-}
-
 @keyframes fadeout {
     from {opacity: 1;}
     to {opacity: 0;}
-}
-
-.fadein{
-    animation-name: fadein;
-    animation-duration: 1.5s;
-
 }
 
 @keyframes fadein {
@@ -121,7 +121,6 @@
 
 @keyframes moveOnScreen2 {
     0% {left: -25%;}
-    25% {left: -25%;}
     100% {left: 21%;}
 }
 
@@ -134,9 +133,10 @@
 #knight{
     z-index: 2;
     transform: none;
-    animation:moveOnScreen;
+    animation-name:none;
     animation-duration: 3s;
     position: absolute;
+    visibility: hidden;
     width: 25%;
     height: 50.5%;
     left: 21%;
@@ -217,6 +217,7 @@
     left: 40%;
     visibility: hidden;
     cursor:pointer;
+    animation-duration: 1.5s;
 
 }
 @keyframes explode {
@@ -235,4 +236,14 @@
     top:45%;
 
 
+}
+#holygrail{
+    animation-name: none;
+    animation-duration: 3s;
+    position: absolute;
+    visibility: hidden;
+    width: 27%;
+    height: 81.5%;
+    left: 36%;
+    top:19%;
 }

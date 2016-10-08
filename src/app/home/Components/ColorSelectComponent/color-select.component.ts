@@ -8,7 +8,7 @@ import {Component, Input, EventEmitter} from '@angular/core';
     pipes: [ ],
     styleUrls: ['./color-select.style.css'],
     templateUrl: './color-select.html',
-    events : ['resumeRequest','launchRequest','essayRequest']
+    events : ['resumeRequest','launchRequest','essayRequest','grailRequest']
 })
 
 export class ColorSelectComponent {
@@ -18,11 +18,13 @@ export class ColorSelectComponent {
     resumeRequest:any;
     launchRequest: any;
     essayRequest: any;
+    grailRequest: any;
 
     constructor() {
         this.resumeRequest = new EventEmitter();
         this.launchRequest = new EventEmitter();
         this.essayRequest = new EventEmitter();
+        this.grailRequest = new EventEmitter();
     }
 
     ngOnInit() {
@@ -45,6 +47,9 @@ export class ColorSelectComponent {
                 this.switchToEssay();
 
             }
+            else if(this.quest == 'holygrail'){
+                this.switchToGrail();
+            }
             else{
                 this.switchToResume();
             }
@@ -65,6 +70,9 @@ export class ColorSelectComponent {
         console.log('3..2..1.. launching!')
         this.launchRequest.emit();
     }
-
+    switchToGrail(){
+        console.log('switching to essay...')
+        this.grailRequest.emit();
+    }
 
 }
