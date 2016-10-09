@@ -1,5 +1,6 @@
 .question{
-    font-size: 3em;
+    font-size: 3.5em;
+    line-height: 90%;
 }
 
 .button {
@@ -9,11 +10,11 @@
     border-color: #ca2300;
     border-style: solid;
     color: black;
-    padding: 15px 32px;
+    padding: 1.5% 2%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 2em;
     margin: 4px 2px;
     cursor: pointer;
     transition: background-color .5s;
@@ -45,8 +46,13 @@ body{
     margin: 0%;
 }
 
-#boss{
-    overflow: hidden;
+#wrapper{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /*overflow: hidden;*/
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 #loading{
@@ -75,3 +81,13 @@ body{
     from {filter: blur(100px);}
     to {filter: blur(0px);}
 }
+
+img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+

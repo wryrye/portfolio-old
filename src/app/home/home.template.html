@@ -1,21 +1,22 @@
-<img id= 'loaded' src="../../assets/img/monty_python_title.png" >
-<img id='world' src="../../assets/img/world7.png" >
-<img id = 'bridge'  src="../../assets/img/bridge.png" >
-<img id = 'sun'  src="../../assets/img/sun2.png" >
-<img id = 'knight'  src="../../assets/img/knight.png" >
-<img id = 'gatekeeper'  src="../../assets/img/wizard3.png" >
-<img id = 'close' src="../../assets/img/close.png" (click)="closeDocument()">
-<div id = 'replay' class ='oldstyle' (click)="replay()">Play Again!</div>
-<img id= 'poof' src="../../assets/img/poof1.png" >
-<img id= 'speech' src="../../assets/img/speech.png" >
-<img id= 'holygrail' src="../../assets/img/holygrail.png" >
+<div id = "wrapper">
+    <img id= 'loaded' src="../../assets/img/monty_python_title.png" >
+    <img id='world' src="../../assets/img/world7.png" >
+    <img id = 'bridge'  src="../../assets/img/bridge.png" >
+    <img id = 'sun'  src="../../assets/img/sun2.png" >
+    <img id = 'knight'  src="../../assets/img/knight.png" >
+    <img id = 'gatekeeper'  src="../../assets/img/wizard3.png" >
+    <img id = 'close' src="../../assets/img/close.png" (click)="closeDocument()">
+    <div id = 'replay' class ='oldstyle' (click)="replay()">Play Again?</div>
+    <img id= 'poof' src="../../assets/img/poof1.png" >
+    <img id= 'speech' src="../../assets/img/speech.png" >
+    <img id= 'holygrail' src="../../assets/img/holygrail.jpg" >
 
-<div>
-    <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
-    <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
-    <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (essayRequest) = "showEssay()" (launchRequest) = "launch()" (grailRequest) = "showGrail()"  [quest]="this.quest"></color-select>
+    <div id="question-wrapper">
+        <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>
+        <quest-select class = "center" id = 'quest' (switchRequest) = "questToColor()"></quest-select>
+        <color-select class = "center" id = 'color' (resumeRequest) = "showResume()" (essayRequest) = "showEssay()" (launchRequest) = "launch()" (grailRequest) = "showGrail()"  [quest]="this.quest"></color-select>
+    </div>
+
+    <canvas id = 'theCanvas'></canvas>
+    <!--<container  class = "container" id="pageContainer" >  </container>-->
 </div>
-
-<canvas id = 'theCanvas'></canvas>
-<!--<container  class = "container" id="pageContainer" >  </container>-->
-

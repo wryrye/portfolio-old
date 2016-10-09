@@ -17,11 +17,11 @@
 }
 
 .center{
-    width:60%;
+    width: 100%;
     text-align: center;
     position: absolute;
-    left: 35%;
-    top:10%;
+    left: 0%;
+    visibility: hidden;
 }
 
 #speech{
@@ -31,6 +31,7 @@
     height:60%;
     opacity: 0;
     animation-duration: 1.5s;
+    visibility: hidden;
 
 }
 
@@ -58,7 +59,7 @@
 
 
 #sun{
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     width: 20%;
     height: 40%;
@@ -167,20 +168,8 @@
     height: 100%;
 }
 @keyframes grow {
-    0% {
-        /*width: 0%;*/
-        /*height: 0%;*/
-        /*top:425px;*/
-        /*left:33%;*/
-        transform: scale(0,0);
-    }
-    100% {
-        /*width: 100%;*/
-        /*height: 100%;*/
-        /*top:0px;*/
-        /*left:0%;*/
-        transform: scale(1,1);
-    }
+    0% {transform: scale(0,0);}
+    100% {transform: scale(1,1);}
 }
 
 
@@ -188,14 +177,8 @@
     position: relative;
     animation-duration: 6s;
     width: 100%;
-    height: 100%;
     visibility: hidden;
     z-index: 2;
-
-    /*width: 0%;*/
-    /*height: 0%;*/
-    /*top:425px;*/
-    /*left:33%;*/
 }
 
 #close{
@@ -211,7 +194,7 @@
     position: absolute;
     top:10%;
     height:10%;
-    font-size: 3em;
+    font-size: 7em;
     width:60%;
     text-align: center;
     left: 40%;
@@ -227,7 +210,7 @@
 }
 
 #poof{
-    z-index: 1;
+    z-index: 0;
     opacity: 0;
     position: absolute;
     width: 36%;
@@ -246,4 +229,16 @@
     height: 81.5%;
     left: 36%;
     top:19%;
+}
+
+#question-wrapper{
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 60%;
+    text-align: center;
+    position: absolute;
+    left: 35%;
+    height: 30%;
+    top: 7%;
+    visibility: hidden;
 }
