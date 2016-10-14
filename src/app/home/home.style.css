@@ -194,7 +194,7 @@
     position: absolute;
     top:10%;
     height:10%;
-    font-size: 7em;
+    font-size: 6em;
     width:60%;
     text-align: center;
     left: 40%;
@@ -241,4 +241,5 @@
     height: 30%;
     top: 7%;
     visibility: hidden;
+    animation-duration: 1.5s;
 }

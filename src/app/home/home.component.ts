@@ -60,9 +60,15 @@ export class Home  {
         $("#loaded")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
                 jQuery.proxy(function(e){ //when loading is done and animation ends
-                    $("#loaded").css("visibility", "hidden"); //hide loading page
-                    $("#knight").css("visibility", "visible"); //show knight
-                    $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+                    if($("#loaded").css("animation-name") == "fadein") {
+                        $("#loaded").css("animation-name","fadeout2");
+                        $("#wrapper").css("visibility","visible");
+                    }
+                    else{
+                        $("#loaded").css("visibility", "hidden"); //hide loading page
+                        $("#knight").css("visibility", "visible"); //show knight
+                        $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+                    }
                 },this));
 
         $("#knight")
@@ -179,6 +185,9 @@ export class Home  {
         $("#speech").css("animation-name","fadeout")
         $("#speech").css("opacity","0");
         $("#speech").css("z-index","0");
+        $("#question-wrapper").css("animation-name","fadeout")
+        $("#speech").css("opacity","0");
+        $("#speech").css("z-index","0");
         this.color = this.colorSelectComponent.color;
     }
 
@@ -204,7 +213,7 @@ export class Home  {
                 //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
 
-                var viewport = pdfPage.getViewport(3.0);
+                var viewport = pdfPage.getViewport(4.0);
 
                 (<HTMLInputElement>canvas).width = viewport.width;
                 (<HTMLInputElement>canvas).height = viewport.height;
@@ -245,7 +254,7 @@ export class Home  {
                 //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
 
-                var viewport = pdfPage.getViewport(3.0);
+                var viewport = pdfPage.getViewport(4.0);
 
                 (<HTMLInputElement>canvas).width = viewport.width;
                 (<HTMLInputElement>canvas).height = viewport.height;
@@ -266,9 +275,9 @@ export class Home  {
         this.colorToNext()
         var canvas = document.getElementById('theCanvas');
         var ctx=(<HTMLCanvasElement> canvas).getContext("2d");
-        var img = document.getElementById("holygrail");
-        (<HTMLInputElement>canvas).width = "660";
-        (<HTMLInputElement>canvas).height = "364";
+        var img = <HTMLVideoElement>document.getElementById("holygrail");
+        (<HTMLCanvasElement>canvas).width = 660;
+        (<HTMLCanvasElement>canvas).height = 364;
         ctx.drawImage(img, 0, 0,660,364);
         $("#theCanvas").css("height","100%");
     }

@@ -42,7 +42,7 @@ export class ColorSelectComponent {
             this.launchKnight()
         }
         else{
-            $("#boss").css("cursor","url(../../../../assets/img/"+color+"sword.png), auto");
+            $("#wrapper").css("cursor","url(../../../../assets/img/"+color+"sword.png), auto");
             if(this.quest == 'essay'){
                 this.switchToEssay();
 

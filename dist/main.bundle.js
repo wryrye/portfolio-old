@@ -1,75 +1,7 @@
 var ac_main =
 webpackJsonpac__name_([3],{
 
-/***/ 248:
-/***/ function(module, exports) {
-
-"use strict";
-"use strict";
-var PageScrollConfig = (function () {
-    function PageScrollConfig() {
-    }
-    Object.defineProperty(PageScrollConfig, "defaultEasingFunction", {
-        // Getter and setter to avoid auto completion to suggest calling the method
-        get: function () {
-            return PageScrollConfig._easingFunction;
-        },
-        set: function (easingFunction) {
-            PageScrollConfig._easingFunction = easingFunction;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * The number of milliseconds to wait till updating the scroll position again.
-     * Small amounts may produce smoother animations but require more processing power.
-     * @type {number}
-     * @private
-     */
-    PageScrollConfig._interval = 10;
-    /**
-     * The duration how long a scrollTo animation should last by default.
-     * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
-     * @type {number}
-     */
-    PageScrollConfig.defaultDuration = 1250;
-    /**
-     * The distance in pixels above scroll target where the animation should stop. Setting a positive number results in
-     * the scroll target being more in the middle of the screen, negative numbers will produce scrolling "too far"
-     * @type {number}
-     */
-    PageScrollConfig.defaultScrollOffset = 0;
-    /**
-     * The events that are listened to on the body to decide whether a scroll animation has been interfered by the user
-     * @type {string[]}
-     * @private
-     */
-    PageScrollConfig._interruptEvents = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
-    /**
-     * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
-     * scroll animation.
-     * @type {number[]}
-     * @private
-     */
-    PageScrollConfig._interruptKeys = [33, 34, 35, 36, 38, 40];
-    /**
-     * Whether a scroll animation should be interruptible by user interaction (true) or not (false). If the user performs an
-     * interrupting event while a scroll animation takes place, the scroll animation stops.
-     * @type {boolean}
-     */
-    PageScrollConfig.defaultInterruptible = true;
-    PageScrollConfig._easingFunction = function (t, b, c, d) {
-        // Linear easing
-        return c * t / d + b;
-    };
-    return PageScrollConfig;
-}());
-exports.PageScrollConfig = PageScrollConfig;
-
-
-/***/ },
-
-/***/ 270:
+/***/ 179:
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*eslint-disable no-unused-vars*/
@@ -10150,181 +10082,75 @@ return jQuery;
 
 /***/ },
 
-/***/ 278:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 249:
+/***/ function(module, exports) {
 
 "use strict";
 "use strict";
-// Angular 2
-// rc2 workaround
-var platform_browser_1 = __webpack_require__(64);
-var core_1 = __webpack_require__(0);
-// Environment Providers
-var PROVIDERS = [];
-// Angular debug tools in the dev console
-// https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
-var _decorateModuleRef = function identity(value) { return value; };
-if (false) {
-    // Production
-    platform_browser_1.disableDebugTools();
-    core_1.enableProdMode();
-    PROVIDERS = PROVIDERS.slice();
-}
-else {
-    _decorateModuleRef = function (modRef) {
-        var appRef = modRef.injector.get(core_1.ApplicationRef);
-        var cmpRef = appRef.components[0];
-        var _ng = window.ng;
-        platform_browser_1.enableDebugTools(cmpRef);
-        window.ng.probe = _ng.probe;
-        window.ng.coreTokens = _ng.coreTokens;
-        return modRef;
-    };
-    // Development
-    PROVIDERS = PROVIDERS.slice();
-}
-exports.decorateModuleRef = _decorateModuleRef;
-exports.ENV_PROVIDERS = PROVIDERS.slice();
-
-
-/***/ },
-
-/***/ 386:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var ng2_page_scroll_config_1 = __webpack_require__(248);
-var PageScrollManager = (function () {
-    function PageScrollManager() {
+var PageScrollConfig = (function () {
+    function PageScrollConfig() {
     }
-    PageScrollManager.add = function (pageScroll) {
-        this.runningInstances.push(pageScroll);
-    };
-    PageScrollManager.stopAll = function () {
-        if (PageScrollManager.runningInstances.length > 0) {
-            PageScrollManager.runningInstances.forEach(function (pageScroll, index) {
-                pageScroll.stop();
-            });
-            return true;
-        }
-        return false;
-    };
-    PageScrollManager.remove = function (pageScroll) {
-        var index = PageScrollManager.runningInstances.indexOf(pageScroll);
-        if (index >= 0) {
-            PageScrollManager.runningInstances.splice(index, 1);
-            return true;
-        }
-        return false;
-    };
-    PageScrollManager.attachInterfereListeners = function (body) {
-        ng2_page_scroll_config_1.PageScrollConfig._interruptEvents.forEach(function (event) { return body.addEventListener(event, PageScrollManager.listener); });
-    };
-    PageScrollManager.detachInterfereListeners = function (body) {
-        ng2_page_scroll_config_1.PageScrollConfig._interruptEvents.forEach(function (event) { return body.removeEventListener(event, PageScrollManager.listener); });
-    };
-    // Static Array containing all possibly running scroll animations
-    PageScrollManager.runningInstances = [];
-    PageScrollManager.listener = function (event) {
-        // Stop the scroll animation if the user interferes with it
-        if (event.type !== 'keyup' || ng2_page_scroll_config_1.PageScrollConfig._interruptKeys.indexOf(event.keyCode) >= 0) {
-            PageScrollManager.stopAll();
-        }
-    };
-    return PageScrollManager;
-}());
-exports.PageScrollManager = PageScrollManager;
-
-
-/***/ },
-
-/***/ 387:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(573));
-
-
-/***/ },
-
-/***/ 388:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-var AppState = (function () {
-    function AppState() {
-        this._state = {};
-    }
-    Object.defineProperty(AppState.prototype, "state", {
-        // already return a clone of the current state
+    Object.defineProperty(PageScrollConfig, "defaultEasingFunction", {
+        // Getter and setter to avoid auto completion to suggest calling the method
         get: function () {
-            return this._state = this._clone(this._state);
+            return PageScrollConfig._easingFunction;
         },
-        // never allow mutation
-        set: function (value) {
-            throw new Error('do not mutate the `.state` directly');
+        set: function (easingFunction) {
+            PageScrollConfig._easingFunction = easingFunction;
         },
         enumerable: true,
         configurable: true
     });
-    AppState.prototype.get = function (prop) {
-        // use our state getter for the clone
-        var state = this.state;
-        return state.hasOwnProperty(prop) ? state[prop] : state;
+    /**
+     * The number of milliseconds to wait till updating the scroll position again.
+     * Small amounts may produce smoother animations but require more processing power.
+     * @type {number}
+     * @private
+     */
+    PageScrollConfig._interval = 10;
+    /**
+     * The duration how long a scrollTo animation should last by default.
+     * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
+     * @type {number}
+     */
+    PageScrollConfig.defaultDuration = 1250;
+    /**
+     * The distance in pixels above scroll target where the animation should stop. Setting a positive number results in
+     * the scroll target being more in the middle of the screen, negative numbers will produce scrolling "too far"
+     * @type {number}
+     */
+    PageScrollConfig.defaultScrollOffset = 0;
+    /**
+     * The events that are listened to on the body to decide whether a scroll animation has been interfered by the user
+     * @type {string[]}
+     * @private
+     */
+    PageScrollConfig._interruptEvents = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+    /**
+     * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
+     * scroll animation.
+     * @type {number[]}
+     * @private
+     */
+    PageScrollConfig._interruptKeys = [33, 34, 35, 36, 38, 40];
+    /**
+     * Whether a scroll animation should be interruptible by user interaction (true) or not (false). If the user performs an
+     * interrupting event while a scroll animation takes place, the scroll animation stops.
+     * @type {boolean}
+     */
+    PageScrollConfig.defaultInterruptible = true;
+    PageScrollConfig._easingFunction = function (t, b, c, d) {
+        // Linear easing
+        return c * t / d + b;
     };
-    AppState.prototype.set = function (prop, value) {
-        // internally mutate our state
-        return this._state[prop] = value;
-    };
-    AppState.prototype._clone = function (object) {
-        // simple object clone
-        return JSON.parse(JSON.stringify(object));
-    };
-    AppState = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], AppState);
-    return AppState;
+    return PageScrollConfig;
 }());
-exports.AppState = AppState;
+exports.PageScrollConfig = PageScrollConfig;
 
 
 /***/ },
 
-/***/ 389:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(581));
-
-
-/***/ },
-
-/***/ 390:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(586));
-
-
-/***/ },
-
-/***/ 426:
+/***/ 271:
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* Copyright 2012 Mozilla Foundation
@@ -21243,6 +21069,180 @@ exports._UnsupportedManager = _UnsupportedManager;
 
 /***/ },
 
+/***/ 279:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+// Angular 2
+// rc2 workaround
+var platform_browser_1 = __webpack_require__(64);
+var core_1 = __webpack_require__(0);
+// Environment Providers
+var PROVIDERS = [];
+// Angular debug tools in the dev console
+// https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
+var _decorateModuleRef = function identity(value) { return value; };
+if (false) {
+    // Production
+    platform_browser_1.disableDebugTools();
+    core_1.enableProdMode();
+    PROVIDERS = PROVIDERS.slice();
+}
+else {
+    _decorateModuleRef = function (modRef) {
+        var appRef = modRef.injector.get(core_1.ApplicationRef);
+        var cmpRef = appRef.components[0];
+        var _ng = window.ng;
+        platform_browser_1.enableDebugTools(cmpRef);
+        window.ng.probe = _ng.probe;
+        window.ng.coreTokens = _ng.coreTokens;
+        return modRef;
+    };
+    // Development
+    PROVIDERS = PROVIDERS.slice();
+}
+exports.decorateModuleRef = _decorateModuleRef;
+exports.ENV_PROVIDERS = PROVIDERS.slice();
+
+
+/***/ },
+
+/***/ 387:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var ng2_page_scroll_config_1 = __webpack_require__(249);
+var PageScrollManager = (function () {
+    function PageScrollManager() {
+    }
+    PageScrollManager.add = function (pageScroll) {
+        this.runningInstances.push(pageScroll);
+    };
+    PageScrollManager.stopAll = function () {
+        if (PageScrollManager.runningInstances.length > 0) {
+            PageScrollManager.runningInstances.forEach(function (pageScroll, index) {
+                pageScroll.stop();
+            });
+            return true;
+        }
+        return false;
+    };
+    PageScrollManager.remove = function (pageScroll) {
+        var index = PageScrollManager.runningInstances.indexOf(pageScroll);
+        if (index >= 0) {
+            PageScrollManager.runningInstances.splice(index, 1);
+            return true;
+        }
+        return false;
+    };
+    PageScrollManager.attachInterfereListeners = function (body) {
+        ng2_page_scroll_config_1.PageScrollConfig._interruptEvents.forEach(function (event) { return body.addEventListener(event, PageScrollManager.listener); });
+    };
+    PageScrollManager.detachInterfereListeners = function (body) {
+        ng2_page_scroll_config_1.PageScrollConfig._interruptEvents.forEach(function (event) { return body.removeEventListener(event, PageScrollManager.listener); });
+    };
+    // Static Array containing all possibly running scroll animations
+    PageScrollManager.runningInstances = [];
+    PageScrollManager.listener = function (event) {
+        // Stop the scroll animation if the user interferes with it
+        if (event.type !== 'keyup' || ng2_page_scroll_config_1.PageScrollConfig._interruptKeys.indexOf(event.keyCode) >= 0) {
+            PageScrollManager.stopAll();
+        }
+    };
+    return PageScrollManager;
+}());
+exports.PageScrollManager = PageScrollManager;
+
+
+/***/ },
+
+/***/ 388:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(573));
+
+
+/***/ },
+
+/***/ 389:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var core_1 = __webpack_require__(0);
+var AppState = (function () {
+    function AppState() {
+        this._state = {};
+    }
+    Object.defineProperty(AppState.prototype, "state", {
+        // already return a clone of the current state
+        get: function () {
+            return this._state = this._clone(this._state);
+        },
+        // never allow mutation
+        set: function (value) {
+            throw new Error('do not mutate the `.state` directly');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AppState.prototype.get = function (prop) {
+        // use our state getter for the clone
+        var state = this.state;
+        return state.hasOwnProperty(prop) ? state[prop] : state;
+    };
+    AppState.prototype.set = function (prop, value) {
+        // internally mutate our state
+        return this._state[prop] = value;
+    };
+    AppState.prototype._clone = function (object) {
+        // simple object clone
+        return JSON.parse(JSON.stringify(object));
+    };
+    AppState = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], AppState);
+    return AppState;
+}());
+exports.AppState = AppState;
+
+
+/***/ },
+
+/***/ 390:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(581));
+
+
+/***/ },
+
+/***/ 391:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(586));
+
+
+/***/ },
+
 /***/ 444:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21265,8 +21265,8 @@ __export(__webpack_require__(575));
 var core_1 = __webpack_require__(0);
 var router_1 = __webpack_require__(115);
 var platform_browser_1 = __webpack_require__(64);
-var ng2_page_scroll_config_1 = __webpack_require__(248);
-var ng2_page_scroll_manager_1 = __webpack_require__(386);
+var ng2_page_scroll_config_1 = __webpack_require__(249);
+var ng2_page_scroll_manager_1 = __webpack_require__(387);
 var PageScroll = (function () {
     function PageScroll(router, document) {
         this.router = router;
@@ -21509,9 +21509,9 @@ exports.About = About;
  * Angular 2 decorators and services
  */
 var core_1 = __webpack_require__(0);
-var app_service_1 = __webpack_require__(388);
+var app_service_1 = __webpack_require__(389);
 //noinspection TypeScriptUnresolvedFunction
-var $ = __webpack_require__(270);
+var $ = __webpack_require__(179);
 /*
  * App Component
  * Top Level Component
@@ -21559,22 +21559,22 @@ exports.App = App;
 "use strict";
 var core_1 = __webpack_require__(0);
 var platform_browser_1 = __webpack_require__(64);
-var forms_1 = __webpack_require__(228);
-var http_1 = __webpack_require__(181);
+var forms_1 = __webpack_require__(229);
+var http_1 = __webpack_require__(182);
 var router_1 = __webpack_require__(115);
 var hmr_1 = __webpack_require__(123);
 /*
  * Platform and Environment providers/directives/pipes
  */
-var environment_1 = __webpack_require__(278);
+var environment_1 = __webpack_require__(279);
 var app_routes_1 = __webpack_require__(577);
 // App is our top level component
 var app_component_1 = __webpack_require__(574);
 var app_resolver_1 = __webpack_require__(576);
-var app_service_1 = __webpack_require__(388);
-var home_1 = __webpack_require__(389);
-var about_1 = __webpack_require__(387);
-var no_content_1 = __webpack_require__(390);
+var app_service_1 = __webpack_require__(389);
+var home_1 = __webpack_require__(390);
+var about_1 = __webpack_require__(388);
+var no_content_1 = __webpack_require__(391);
 // Application wide providers
 var APP_PROVIDERS = app_resolver_1.APP_RESOLVER_PROVIDERS.concat([
     app_service_1.AppState
@@ -21673,9 +21673,9 @@ exports.APP_RESOLVER_PROVIDERS = [
 
 "use strict";
 "use strict";
-var home_1 = __webpack_require__(389);
-var about_1 = __webpack_require__(387);
-var no_content_1 = __webpack_require__(390);
+var home_1 = __webpack_require__(390);
+var about_1 = __webpack_require__(388);
+var no_content_1 = __webpack_require__(391);
 exports.ROUTES = [
     { path: '', component: home_1.Home },
     { path: 'home', component: home_1.Home },
@@ -21693,33 +21693,52 @@ exports.ROUTES = [
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+/* WEBPACK VAR INJECTION */(function($) {"use strict";
 var core_1 = __webpack_require__(0);
 var ColorSelectComponent = (function () {
     function ColorSelectComponent() {
         this.resumeRequest = new core_1.EventEmitter();
-        this.otherRequest = new core_1.EventEmitter();
+        this.launchRequest = new core_1.EventEmitter();
+        this.essayRequest = new core_1.EventEmitter();
+        this.grailRequest = new core_1.EventEmitter();
     }
     ColorSelectComponent.prototype.ngOnInit = function () {
     };
     ColorSelectComponent.prototype.ngOnChanges = function () {
     };
     ColorSelectComponent.prototype.selectColor = function (color) {
-        this.color = color;
-        if (this.quest == 'resume') {
-            this.switchToResume();
+        console.log(this.quest);
+        if (color == "launch") {
+            this.launchKnight();
         }
         else {
-            this.switchToOther();
+            $("#wrapper").css("cursor", "url(../../../../assets/img/" + color + "sword.png), auto");
+            if (this.quest == 'essay') {
+                this.switchToEssay();
+            }
+            else if (this.quest == 'holygrail') {
+                this.switchToGrail();
+            }
+            else {
+                this.switchToResume();
+            }
         }
     };
     ColorSelectComponent.prototype.switchToResume = function () {
         console.log('switching to resume...');
         this.resumeRequest.emit();
     };
-    ColorSelectComponent.prototype.switchToOther = function () {
-        console.log('switching to other...');
-        this.otherRequest.emit();
+    ColorSelectComponent.prototype.switchToEssay = function () {
+        console.log('switching to essay...');
+        this.essayRequest.emit();
+    };
+    ColorSelectComponent.prototype.launchKnight = function () {
+        console.log('3..2..1.. launching!');
+        this.launchRequest.emit();
+    };
+    ColorSelectComponent.prototype.switchToGrail = function () {
+        console.log('switching to essay...');
+        this.grailRequest.emit();
     };
     __decorate([
         core_1.Input(), 
@@ -21733,7 +21752,7 @@ var ColorSelectComponent = (function () {
             pipes: [],
             styles: [__webpack_require__(761)],
             template: __webpack_require__(731),
-            events: ['resumeRequest', 'otherRequest']
+            events: ['resumeRequest', 'launchRequest', 'essayRequest', 'grailRequest']
         }), 
         __metadata('design:paramtypes', [])
     ], ColorSelectComponent);
@@ -21741,6 +21760,7 @@ var ColorSelectComponent = (function () {
 }());
 exports.ColorSelectComponent = ColorSelectComponent;
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(179)))
 
 /***/ },
 
@@ -21844,87 +21864,128 @@ var x_large_1 = __webpack_require__(584);
 var name_select_component_1 = __webpack_require__(579);
 var quest_select_component_1 = __webpack_require__(580);
 var color_select_component_1 = __webpack_require__(578);
-__webpack_require__(426);
 var ng2_page_scroll_1 = __webpack_require__(729);
+__webpack_require__(271);
 var Home = (function () {
     function Home() {
     }
+    Home.prototype.ngOnInit = function () {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            console.log('hello mobile user!');
+            $(".question").css("font-size", "2em");
+            $(".button").css("font-size", "1em");
+            $("#replay").css("font-size", "4em");
+        }
+    };
     Home.prototype.ngAfterViewInit = function () {
-        this.knightCount = 0;
-        console.log(this.knightCount);
+        //use CSS animation endings for signalling/transitioning
+        $("#loaded")
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
+            $("#loaded").css("visibility", "hidden"); //hide loading page
+            $("#knight").css("visibility", "visible"); //show knight
+            $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+        }, this));
         $("#knight")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
-            console.log(this.knightCount);
-            //when knight enters window
-            if (this.knightCount == 0) {
-                document.getElementById('name').className = 'fadein center';
-                document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
+            if ($("#knight").css("animation-name") == "launch") {
+                $("#knight").css("animation-name", "moveOnScreen2"); //move knight back on screen
             }
-            //when night retreives resume
-            if (this.knightCount == 1) {
-                $("#theCanvas").css("visibility", "visible"); //JQuery DOM Manipulation
-                $("#theCanvas").css("animation-name", "grow");
+            if ($("#knight").css("animation-name") == "moveOnScreen") {
+                $("#name").css("animation-name", "fadein");
+                $("#name").css("opacity", "1");
+                $("#name").css("visibility", "visible");
+                $("#speech").css("animation-name", "fadein");
+                $("#speech").css("opacity", "1");
+                $("#speech").css("visibility", "visible");
+                $("#question-wrapper").css("visibility", "visible");
+            }
+            if ($("#knight").css("animation-name") == "crossBridge") {
+                if (this.questSelectComponent.quest == "holygrail") {
+                    $("#theCanvas").css("visibility", "visible");
+                    $("#theCanvas").css("animation-name", "fadein");
+                }
+                else {
+                    $("#theCanvas").css("visibility", "visible"); //make canvas visible
+                    $("#theCanvas").css("animation-name", "grow"); // and expand it ***
+                }
                 $("#theCanvas").css("animation-duration", "2s");
             }
-            this.knightCount++;
+            //note: jQuery.proxy allows reference to 'this'
         }, this));
         $("#theCanvas")
-            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function (e) {
-            $("#close").css("visibility", "visible");
-            $("#knight").css("transform", "none");
-            $("#knight").css("left", "21%");
-            $("#gatekeeper").css("visibility", "visible");
-            $("#poof").css("animation", "toggle");
-            $("#boss").css("overflow", "scroll");
-        });
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
+            $("#close").css("visibility", "visible"); //show close button
+            $("#knight").css("transform", "none"); //reset knight direction
+            $("#knight").css("left", "21%"); //and position
+            $("#poof").css("animation", "toggle"); //toggle-reset poof cloud
+            $("#gatekeeper").css("visibility", "visible"); //show gatekeeper
+            if (this.questSelectComponent.quest != "holygrail") {
+                $("#wrapper").css("overflow-y", "scroll");
+            } //enable scrolling
+        }, this));
         $("#color")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
             if ($("#color").css("opacity") == "0") {
-                $("#poof").css("animation", "explode");
+                $("#poof").css("animation", "explode"); //explode the poof
                 $("#poof").css("animation-duration", "1.5s");
-                $("#gatekeeper").css("visibility", "hidden");
-                $("#knight").css("animation", "crossBridge");
+                $("#gatekeeper").css("visibility", "hidden"); //gatekeeper apparates!
+                $("#knight").css("animation", "crossBridge"); //knight crosses the bridge
                 $("#knight").css("animation-duration", "6s");
-                $("#knight").css("transform", "scaleX(-1)");
+                $("#knight").css("transform", "scaleX(-1)"); //and turns around
                 $("#knight").css("left", "35%");
             }
         }, this));
-    };
-    Home.prototype.ngOnInit = function () {
-    };
-    Home.prototype.ngOnChanges = function () {
+        $("#speech")
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
+            if ($("#speech").css("animation-name") == "fadeout") {
+                $("#question-wrapper").css("visibility", "hidden");
+                $("#name").css("visibility", "hidden"); //and hide the question elements
+                $("#quest").css("visibility", "hidden");
+                $("#color").css("visibility", "hidden");
+                $("#speech").css("visibility", "hidden");
+            }
+        }, this));
     };
     Home.prototype.nameToQuest = function () {
-        document.getElementById('name').className = 'fadeout center';
-        document.getElementById('name').style.opacity = '0';
-        document.getElementById('name').style.zIndex = '0';
-        document.getElementById('quest').className = 'fadein center';
-        document.getElementById('quest').style.opacity = '1';
+        $("#name").css("animation-name", "fadeout");
+        $("#name").css("opacity", "0");
+        $("#name").css("z-index", "0");
+        $("#quest").css("animation-name", "fadein");
+        $("#quest").css("opacity", "1");
+        $("#quest").css("visibility", "visible");
         this.name = this.nameSelectComponent.name;
     };
     Home.prototype.questToColor = function () {
-        document.getElementById('quest').className = 'fadeout center';
-        document.getElementById('quest').style.opacity = '0';
-        document.getElementById('quest').style.zIndex = '0';
-        document.getElementById('color').className = 'fadein center';
-        document.getElementById('color').style.opacity = '1';
+        $("#quest").css("animation-name", "fadeout");
+        $("#quest").css("opacity", "0");
+        $("#quest").css("z-index", "0");
+        $("#color").css("animation-name", "fadein");
+        $("#color").css("opacity", "1");
+        $("#color").css("visibility", "visible");
         this.quest = this.questSelectComponent.quest;
+        //convenient spot to toggle animations to be set again in the future
         $("#knight").css("animation", "toggle");
         $("#theCanvas").css("animation-name", "toggle");
+        $("#wrapper").css("animation-name", "toggle");
+        $("#replay").css("animation-name", "toggle");
     };
     Home.prototype.colorToNext = function () {
-        document.getElementById('color').className = 'fadeout center';
-        document.getElementById('color').style.opacity = '0';
-        document.getElementById('color').style.zIndex = '0';
-        // $("#knight").css("animation","crossBridge");
-        // $("#knight").css("animation-duration","6s");
-        // $("#knight").css("transform","scaleX(-1)");
+        $("#color").css("animation-name", "fadeout");
+        $("#color").css("opacity", "0");
+        $("#color").css("z-index", "0");
+        $("#speech").css("animation-name", "fadeout");
+        $("#speech").css("opacity", "0");
+        $("#speech").css("z-index", "0");
+        $("#question-wrapper").css("animation-name", "fadeout");
+        $("#speech").css("opacity", "0");
+        $("#speech").css("z-index", "0");
         this.color = this.colorSelectComponent.color;
     };
+    //shows Resume
     Home.prototype.showResume = function () {
         this.colorToNext();
         //noinspection TypeScriptUnresolvedFunction
-        var pdfjsLib = __webpack_require__(426);
+        var pdfjsLib = __webpack_require__(271);
         var pdfPath = '../../assets/docs/Ryan Coughlin Resume.pdf';
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
@@ -21938,7 +21999,7 @@ var Home = (function () {
                 // Display page on the existing canvas with 100% scale.
                 //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
-                var viewport = pdfPage.getViewport(3.0);
+                var viewport = pdfPage.getViewport(4.0);
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
                 var ctx = canvas.getContext('2d');
@@ -21951,29 +22012,79 @@ var Home = (function () {
         }).catch(function (reason) {
             console.error('Error: ' + reason);
         });
+        $("#theCanvas").css("height", "auto");
     };
-    Home.prototype.closeStuff = function () {
-        $("#theCanvas").css("visibility", "hidden");
-        $("#close").css("visibility", "hidden");
-        $("#boss").css("overflow", "hidden");
-        document.getElementById('name').style.visibility = 'hidden';
-        document.getElementById('quest').style.visibility = 'hidden';
-        document.getElementById('color').style.visibility = 'hidden';
-        $("#replay").css("visibility", "visible");
-        document.getElementById('replay').className = 'fadein center oldstyle';
+    Home.prototype.showEssay = function () {
+        this.colorToNext();
+        //noinspection TypeScriptUnresolvedFunction
+        var pdfjsLib = __webpack_require__(271);
+        var pdfPath = '../../assets/docs/chinessay.pdf';
+        pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
+        var loadingTask = pdfjsLib.getDocument(pdfPath);
+        console.log(loadingTask);
+        var PAGE_TO_VIEW = 1;
+        var SCALE = 1.0;
+        var loadingTask = pdfjsLib.getDocument(pdfPath);
+        loadingTask.promise.then(function (pdfDocument) {
+            // Request a first page
+            return pdfDocument.getPage(1).then(function (pdfPage) {
+                // Display page on the existing canvas with 100% scale.
+                //var viewport = pdfPage.getViewport(1);
+                var canvas = document.getElementById('theCanvas');
+                var viewport = pdfPage.getViewport(4.0);
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                var ctx = canvas.getContext('2d');
+                var renderTask = pdfPage.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+                return renderTask.promise;
+            });
+        }).catch(function (reason) {
+            console.error('Error: ' + reason);
+        });
+        $("#theCanvas").css("height", "auto");
     };
+    Home.prototype.showGrail = function () {
+        this.colorToNext();
+        var canvas = document.getElementById('theCanvas');
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("holygrail");
+        canvas.width = 660;
+        canvas.height = 364;
+        ctx.drawImage(img, 0, 0, 660, 364);
+        $("#theCanvas").css("height", "100%");
+    };
+    //closes Resume
+    Home.prototype.closeDocument = function () {
+        $("#theCanvas").css("visibility", "hidden"); //hides resume canvas
+        $("#close").css("visibility", "hidden"); //hides close button
+        $("#wrapper").css("overflow-y", "hidden"); //disables scroll
+        $("#replay").css("visibility", "visible"); //show replay button
+        $("#replay").css("animation-name", "fadein");
+    };
+    //launch knight into the abyss when he lies about his own favorite color?!
+    Home.prototype.launch = function () {
+        $("#knight").css("animation", "launch");
+        $("#knight").css("animation-duration", "1s");
+    };
+    //reset game to initial values
     Home.prototype.replay = function () {
-        this.knightCount = 1;
-        console.log("here");
-        document.getElementById('name').className = 'fadein center';
-        document.getElementById('name').style.opacity = '1'; //JS DOM Manipulation
-        document.getElementById('name').style.visibility = 'visible';
-        document.getElementById('quest').style.visibility = 'visible';
-        document.getElementById('color').style.visibility = 'visible';
-        document.getElementById('name').style.zIndex = '3';
-        document.getElementById('quest').style.zIndex = '2';
-        document.getElementById('color').style.zIndex = '1';
+        console.log("replay!!!");
+        $("#name").css("z-index", "3");
+        $("#quest").css("z-index", "2");
+        $("#color").css("z-index", "1");
         $("#replay").css("visibility", "hidden");
+        $("#wrapper").css("animation", "blur");
+        $("#wrapper").css("animation-duration", "1s");
+        $("#knight").css("animation-name", "moveOnScreen");
+        $("#knight").css("animation-duration", "3s");
+    };
+    Home.prototype.testGrail = function () {
+        $("#knight").css("animation", "crossBridge"); //knight crosses the bridge
+        $("#knight").css("animation-duration", "1s");
+        this.showGrail();
     };
     __decorate([
         core_1.Input(), 
@@ -22015,7 +22126,7 @@ var Home = (function () {
 }());
 exports.Home = Home;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(270), __webpack_require__(270)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(179), __webpack_require__(179)))
 
 /***/ },
 
@@ -22038,7 +22149,7 @@ __export(__webpack_require__(583));
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var http_1 = __webpack_require__(181);
+var http_1 = __webpack_require__(182);
 var Title = (function () {
     function Title(http) {
         this.http = http;
@@ -22141,8 +22252,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(__webpack_require__(572));
-__export(__webpack_require__(386));
-__export(__webpack_require__(248));
+__export(__webpack_require__(387));
+__export(__webpack_require__(249));
 //# sourceMappingURL=ng2-page-scroll.js.map
 
 /***/ },
@@ -22150,28 +22261,28 @@ __export(__webpack_require__(248));
 /***/ 731:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"oldstyle center question\">What is your favorite color?</div>\n<button class = \"button oldstyle\" (click)=\"selectColor('Explore Resume')\"><span>Blue</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('Examine Interests')\"><span>Yellow</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('Glory')\"><span>Red</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('Gold')\"><span>Orange</span></button>\n"
+module.exports = "<div class=\"oldstyle center question\">What is your favorite color?</div>\n<button class = \"button oldstyle\" (click)=\"selectColor('launch')\"><span>Blue... No, Yellow!</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('blue')\"><span>Blue</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('yellow')\"><span>Yellow</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('red')\"><span>Red</span></button>\n"
 
 /***/ },
 
 /***/ 732:
 /***/ function(module, exports) {
 
-module.exports = "<div class = \"oldstyle center question\">What is your Name?</div>\n<button class = \"button oldstyle\" (click)=\"selectName('Employer')\"><span>Employer</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Friend')\"><span>Friend</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Family')\"><span>Family</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Andrew Ma')\"><span>Andrew Ma </span></button>\n"
+module.exports = "<div class = \"oldstyle center question\">What is your Name?</div>\n<button class = \"button oldstyle\" (click)=\"selectName('Employer')\"><span>Sir Lancelot</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Friend')\"><span>Sir Robin</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Family')\"><span>Sir Galahad</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Andrew Ma')\"><span>King Arthur </span></button>\n"
 
 /***/ },
 
 /***/ 733:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"oldstyle center question\">What is your Quest?</div>\n<button class = \"button oldstyle\" (click)=\"selectQuest('resume')\"><span>Explore Resume</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('resume')\"><span>Explore Resume</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('resume')\"><span>Explore Resume</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('gold')\"><span>Explore Resume</span></button>\n"
+module.exports = "<div class=\"oldstyle center question\">What is your Quest?</div>\n<button class = \"button oldstyle\" (click)=\"selectQuest('resume')\"><span>Explore My Résumé</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('essay')\"><span>Venture to The Orient</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('holygrail')\"><span>Seek the Holy Grail</span></button>\n"
 
 /***/ },
 
 /***/ 734:
 /***/ function(module, exports) {
 
-module.exports = "<!--<div>-->\n  <!--{{name}}-->\n  <!--{{quest}}-->\n  <!--{{color}}-->\n<!--</div>-->\n\n<img id='world' src=\"../../assets/img/world7.png\" >\n<img id = 'bridge'  src=\"../../assets/img/bridge.png\" >\n<img id = 'sun'  src=\"../../assets/img/sun2.png\" >\n<img id = 'knight'  src=\"../../assets/img/knight.png\" >\n<img id = 'gatekeeper'  src=\"../../assets/img/wizard3.png\" >\n<img id = 'close' c src=\"../../assets/img/close.png\" (click)=\"closeStuff()\">\n<div id = 'replay' class ='oldstyle' (click)=\"replay()\">Play Again!</div>\n<img id= 'poof' src=\"../../assets/img/poof1.png\" >\n\n<div>\n  <name-select class = \"center\" id = 'name'  (switchRequest) = \"nameToQuest()\" ></name-select>\n  <quest-select class = \"center\" id = 'quest' (switchRequest) = \"questToColor()\"></quest-select>\n  <color-select class = \"center\" id = 'color' (resumeRequest) = \"showResume()\" (otherRequest) = \"colorToNext()\" [quest]=\"this.quest\"></color-select>\n</div>\n\n<canvas id = 'theCanvas'></canvas>\n<!--<container  class = \"container\" id=\"pageContainer\" >  </container>-->\n\n"
+module.exports = "<div id = \"wrapper\">\n    <img id= 'loaded' src=\"../../assets/img/monty_python_title.png\" >\n    <img id='world' src=\"../../assets/img/world7.png\" >\n    <img id = 'bridge'  src=\"../../assets/img/bridge.png\" >\n    <img id = 'sun'  src=\"../../assets/img/sun2.png\" >\n    <img id = 'knight'  src=\"../../assets/img/knight.png\" >\n    <img id = 'gatekeeper'  src=\"../../assets/img/wizard3.png\" >\n    <img id = 'close' src=\"../../assets/img/close.png\" (click)=\"closeDocument()\">\n    <div id = 'replay' class ='oldstyle' (click)=\"replay()\">Play Again?</div>\n    <img id= 'poof' src=\"../../assets/img/poof1.png\" >\n    <img id= 'speech' src=\"../../assets/img/speech.png\" >\n    <img id= 'holygrail' src=\"../../assets/img/holygrail.jpg\" >\n\n    <div id=\"question-wrapper\">\n        <name-select class = \"center\" id = 'name'  (switchRequest) = \"nameToQuest()\" ></name-select>\n        <quest-select class = \"center\" id = 'quest' (switchRequest) = \"questToColor()\"></quest-select>\n        <color-select class = \"center\" id = 'color' (resumeRequest) = \"showResume()\" (essayRequest) = \"showEssay()\" (launchRequest) = \"launch()\" (grailRequest) = \"showGrail()\"  [quest]=\"this.quest\"></color-select>\n    </div>\n\n    <canvas id = 'theCanvas'></canvas>\n    <!--<container  class = \"container\" id=\"pageContainer\" >  </container>-->\n</div>\n"
 
 /***/ },
 
@@ -22218,7 +22329,7 @@ module.exports = ""
 /***/ 764:
 /***/ function(module, exports) {
 
-module.exports = "#name{\n  z-index: 3;\n  position: absolute;\n  opacity: 0;\n}\n\n#quest{\n  z-index: 2;\n  position: absolute;\n  opacity: 0;\n}\n\n#color{\n  z-index: 1;\n  position: absolute;\n  opacity: 0;\n}\n\n.center{\n  width:60%;\n  text-align: center;\n  left: 40%\n}\n\n#world{\n  z-index: -1;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n\n#bridge{\n  z-index: -1;\n  position: absolute;\n  width: 34%;\n  height: 50%;\n  left:73%;\n  top: 53%;\n}\n\n@keyframes shine {\n  0% {transform: rotate(5deg);transform: skewY(-5deg);}\n  55% {transform: rotate(-5deg);transform: skewY(5deg);}\n  100% {transform: rotate(5deg);transform: skewY(-5deg);}\n}\n\n\n#sun{\n  z-index: -1;\n  position: absolute;\n  width: 20%;\n  height: 40%;\n  animation-name: shine;\n  animation-duration: 5s;\n  animation-iteration-count: infinite;\n  transform: rotate(5deg);\n}\n\n.fadeout{\n  animation-name: fadeout;\n  animation-duration: 1.5s;\n\n}\n\n@keyframes fadeout {\n  from {opacity: 1;}\n  to {opacity: 0;}\n}\n\n.fadein{\n  animation-name: fadein;\n  animation-duration: 1.5s;\n\n}\n\n@keyframes fadein {\n  from {opacity: 0;}\n  to {opacity: 1;}\n}\n\n\n@keyframes crossBridge {\n  0% {\n    left: 21%;\n    transform: none;\n  }\n  30% {\n    left:21%;\n    transform: none;\n  }\n  40%{\n    top: 43%;\n  }\n  48%{\n    top: 23%;\n  }\n  65% {\n    left: 110%;\n    transform: none;\n  }\n  66%{\n    transform: scaleX(-1);\n  }\n  73%{\n    top: 23%;\n  }\n  82%{\n    top: 43%;\n  }\n  100% {\n    left: 35%;\n    transform: scaleX(-1);\n  }\n}\n\n@keyframes moveOnScreen {\n  0% {left: -25%;}\n  25% {left: -25%;}\n  100% {left: 21%;}\n}\n\n#knight{\n  z-index: 2;\n  transform: none;\n  animation:moveOnScreen;\n  animation-duration: 3s;\n  position: absolute;\n  width: 25%;\n  height: 50.5%;\n  left: 21%;\n  top:43%;\n\n}\n\n@keyframes backUp {\n    0% {transform:scale(1,1);}\n    100% {transform: scale(0,0);}\n\n    /*0%{top: 53%}*/\n    /*100%{top: 20%}*/\n}\n\n#gatekeeper{\n  z-index: 1;\n  position: absolute;\n  width: 18%;\n  height: 40%;\n  left: 56%;\n  top:53%;\n}\n\n.container{\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n@keyframes grow {\n  0% {\n    /*width: 0%;*/\n    /*height: 0%;*/\n    /*top:425px;*/\n    /*left:33%;*/\n      transform: scale(0,0);\n  }\n  100% {\n    /*width: 100%;*/\n    /*height: 100%;*/\n    /*top:0px;*/\n    /*left:0%;*/\n      transform: scale(1,1);\n  }\n}\n\n\n#theCanvas{\n  position: relative;\n  animation-duration: 6s;\n  width: 100%;\n  height: 100%;\n  visibility: hidden;\n  z-index: 2;\n\n    /*width: 0%;*/\n    /*height: 0%;*/\n    /*top:425px;*/\n    /*left:33%;*/\n}\n\n#close{\n  width: 5%;\n  left:95%;\n  position: absolute;\n  visibility: hidden;\n  z-index: 3;\n  cursor: pointer;\n}\n\n#replay{\n  position: absolute;\n  top:10%;\n  height:10%;\n  font-size: 3em;\n  width:60%;\n  text-align: center;\n  left: 40%;\n  visibility: hidden;\n  cursor:pointer;\n\n}\n@keyframes explode {\n    0%{opacity:1; }\n    30%{opacity:1; }\n    100%{opacity:0; }\n}\n\n#poof{\n    z-index: 1;\n    opacity: 0;\n    position: absolute;\n    width: 36%;\n    height: 65%;\n    left: 49%;\n    top:45%;\n\n}\n"
+module.exports = "#name{\n    z-index: 3;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#quest{\n    z-index: 2;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#color{\n    z-index: 1;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n.center{\n    width: 100%;\n    text-align: center;\n    position: absolute;\n    left: 0%;\n    visibility: hidden;\n}\n\n#speech{\n    position: absolute;\n    left: 30%;\n    width:70%;\n    height:60%;\n    opacity: 0;\n    animation-duration: 1.5s;\n    visibility: hidden;\n\n}\n\n#world{\n    z-index: -1;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n\n#bridge{\n    z-index: -1;\n    position: absolute;\n    width: 34%;\n    height: 50%;\n    left:73%;\n    top: 53%;\n}\n\n@keyframes shine {\n    0% {transform: rotate(5deg);transform: skewY(-5deg);}\n    55% {transform: rotate(-5deg);transform: skewY(5deg);}\n    100% {transform: rotate(5deg);transform: skewY(-5deg);}\n}\n\n\n#sun{\n    z-index: 1;\n    position: absolute;\n    width: 20%;\n    height: 40%;\n    animation-name: shine;\n    animation-duration: 5s;\n    animation-iteration-count: infinite;\n    transform: rotate(5deg);\n}\n\n@keyframes fadeout {\n    from {opacity: 1;}\n    to {opacity: 0;}\n}\n\n@keyframes fadein {\n    from {opacity: 0;}\n    to {opacity: 1;}\n}\n\n\n@keyframes crossBridge {\n    0% {\n        left: 21%;\n        transform: none;\n    }\n    30% {\n        left:21%;\n        transform: none;\n    }\n    40%{\n        top: 43%;\n    }\n    48%{\n        top: 23%;\n    }\n    65% {\n        left: 110%;\n        transform: none;\n    }\n    66%{\n        transform: scaleX(-1);\n    }\n    73%{\n        top: 23%;\n    }\n    82%{\n        top: 43%;\n    }\n    100% {\n        left: 35%;\n        transform: scaleX(-1);\n    }\n}\n\n@keyframes moveOnScreen {\n    0% {left: -25%;}\n    25% {left: -25%;}\n    100% {left: 21%;}\n}\n\n@keyframes moveOnScreen2 {\n    0% {left: -25%;}\n    100% {left: 21%;}\n}\n\n\n@keyframes launch {\n    0%{top:43%;}\n    100%{top:-80%;}\n}\n\n#knight{\n    z-index: 2;\n    transform: none;\n    animation-name:none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 25%;\n    height: 50.5%;\n    left: 21%;\n    top:43%;\n\n}\n\n@keyframes backUp {\n    0% {transform:scale(1,1);}\n    100% {transform: scale(0,0);}\n\n    /*0%{top: 53%}*/\n    /*100%{top: 20%}*/\n}\n\n#gatekeeper{\n    z-index: 1;\n    position: absolute;\n    width: 18%;\n    height: 40%;\n    left: 56%;\n    top:53%;\n}\n\n.container{\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n@keyframes grow {\n    0% {transform: scale(0,0);}\n    100% {transform: scale(1,1);}\n}\n\n\n#theCanvas{\n    position: relative;\n    animation-duration: 6s;\n    width: 100%;\n    visibility: hidden;\n    z-index: 2;\n}\n\n#close{\n    width: 5%;\n    left:95%;\n    position: absolute;\n    visibility: hidden;\n    z-index: 3;\n    cursor: pointer;\n}\n\n#replay{\n    position: absolute;\n    top:10%;\n    height:10%;\n    font-size: 6em;\n    width:60%;\n    text-align: center;\n    left: 40%;\n    visibility: hidden;\n    cursor:pointer;\n    animation-duration: 1.5s;\n\n}\n@keyframes explode {\n    0%{opacity:1; }\n    30%{opacity:1; }\n    100%{opacity:0; }\n}\n\n#poof{\n    z-index: 0;\n    opacity: 0;\n    position: absolute;\n    width: 36%;\n    height: 65%;\n    left: 49%;\n    top:45%;\n\n\n}\n#holygrail{\n    animation-name: none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 27%;\n    height: 81.5%;\n    left: 36%;\n    top:19%;\n}\n\n#question-wrapper{\n    overflow-x: hidden;\n    overflow-y: auto;\n    width: 60%;\n    text-align: center;\n    position: absolute;\n    left: 35%;\n    height: 30%;\n    top: 7%;\n    visibility: hidden;\n    animation-duration: 1.5s;\n}"
 
 /***/ },
 
@@ -22230,8 +22341,8 @@ module.exports = "#name{\n  z-index: 3;\n  position: absolute;\n  opacity: 0;\n}
 /*
  * Angular bootstraping
  */
-var platform_browser_dynamic_1 = __webpack_require__(182);
-var environment_1 = __webpack_require__(278);
+var platform_browser_dynamic_1 = __webpack_require__(183);
+var environment_1 = __webpack_require__(279);
 var hmr_1 = __webpack_require__(123);
 /*
  * App Module
