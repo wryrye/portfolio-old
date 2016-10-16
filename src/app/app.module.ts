@@ -18,6 +18,8 @@ import { Home } from './home';
 import { About } from './about';
 import { NoContent } from './no-content';
 import {ColorSelectComponent} from "./home/Components/ColorSelectComponent/color-select.component";
+import {QuestSelectComponent} from "./home/Components/QuestSelectComponent/quest-select.component";
+import {NameSelectComponent} from "./home/Components/NameSelectComponent/name-select.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -31,7 +33,9 @@ const APP_PROVIDERS = [
 @NgModule({
   bootstrap: [ App ],
   declarations: [
-      ColorSelectComponent,
+    NameSelectComponent,
+    ColorSelectComponent,
+    QuestSelectComponent,
     App,
     About,
     Home,
