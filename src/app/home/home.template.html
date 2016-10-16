@@ -1,4 +1,5 @@
-<img id= 'loaded' src="../../assets/img/monty_python_title.png" >
+<div id = "loading2" class = "loading oldstyle" *ngIf = "!this.dataIsLoaded">LOADING</div>
+<img id= 'intro' src="../../assets/img/monty_python_title.png" *ngIf = "!this.dataIsLoaded">
 <div id = "wrapper">
     <img id='world' src="../../assets/img/world7.png" >
     <img id = 'bridge'  src="../../assets/img/bridge.png" >
@@ -6,6 +7,7 @@
     <img id = 'knight'  src="../../assets/img/knight.png" >
     <img id = 'gatekeeper'  src="../../assets/img/wizard3.png" >
     <img id = 'close' src="../../assets/img/close.png" (click)="closeDocument()">
+    <a href = 'fileURL' target="_blank"><img id = 'download'   src="../../assets/img/download.png"></a>
     <div id = 'replay' class ='oldstyle' (click)="replay()">Play Again?</div>
     <img id= 'poof' src="../../assets/img/poof1.png" >
     <img id= 'speech' src="../../assets/img/speech.png" >

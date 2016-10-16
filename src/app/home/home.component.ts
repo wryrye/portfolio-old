@@ -1,6 +1,6 @@
 import {Component, ViewChild, Input} from '@angular/core';
 import { Title } from './title';
-import { XLarge } from './x-large';
+// import { XLarge } from './x-large';
 import { NameSelectComponent} from  './Components/NameSelectComponent/name-select.component'
 import {QuestSelectComponent} from "./Components/QuestSelectComponent/quest-select.component";
 import {ColorSelectComponent} from "./Components/ColorSelectComponent/color-select.component";
@@ -14,7 +14,7 @@ import 'pdfjs-dist';
         Title,
     ],
     directives: [
-        XLarge,
+        // XLarge,
         NameSelectComponent,
         QuestSelectComponent,
         ColorSelectComponent,
@@ -31,6 +31,7 @@ export class Home  {
     name: string;
     quest: string;
     color: string;
+    dataIsLoaded:boolean
 
     constructor() {}
 
@@ -45,32 +46,65 @@ export class Home  {
     private colorSelectComponent: ColorSelectComponent;
 
     ngOnInit(){
+        //modified settings for mobile
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
             console.log('hello mobile user!');
             $(".question").css("font-size", "2em");
             $(".button").css("font-size", "1em");
             $("#replay").css("font-size", "4em");
         }
+        //removes loading screens when true
+        this.dataIsLoaded = false;
+
+        //paints canvas with loading screen in case document does not load in time
+        var canvas = document.getElementById('theCanvas');
+        var ctx=(<HTMLCanvasElement> canvas).getContext("2d");
+
+        ctx.fillStyle ="white";
+        ctx.canvas.width  = window.innerWidth;
+        ctx.canvas.height = window.innerWidth*1.414;
+        ctx.rect(0,0,window.innerWidth,window.innerWidth*1.414);
+        ctx.fill();
+
+        ctx.font="6em goudy_old_stylebold";
+        ctx.fillStyle = "black"
+        ctx.textAlign="center";
+        ctx.fillText("LOADING", window.innerWidth/2, window.innerHeight/2);
+
     }
 
     ngAfterViewInit(){
 
-        //use CSS animation endings for signalling/transitioning
+        //use image load status and CSS animation endings for signalling/transitioning
 
-        $("#loaded")
+        //when intro image is loaded
+        $("#intro")
+            .on("load",
+                jQuery.proxy(function(e) {
+                    console.log("intro loaded")
+                    $("#loading2").css("visibility", "hidden"); //hide loading animation
+                    $("#intro").css("visibility", "visible"); //show intro
+                    $("#intro").css("animation-name", "fadein2");//animate intro
+
+                },this));
+
+        $("#intro")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-                jQuery.proxy(function(e){ //when loading is done and animation ends
-                    if($("#loaded").css("animation-name") == "fadein") {
-                        $("#loaded").css("animation-name","fadeout2");
-                        $("#wrapper").css("visibility","visible");
-                    }
-                    else{
-                        $("#loaded").css("visibility", "hidden"); //hide loading page
-                        $("#knight").css("visibility", "visible"); //show knight
+                jQuery.proxy(function(e){//initiate intro ending
+                    if($("#intro").css("animation-name") == "fadein2") {
+                        $("#intro").css("animation-duration", "2s"); //animate the ending!
+                        $("#intro").css("animation-name","fadeout2");//animate the ending!
+
+                        $("#wrapper").css("visibility","visible");//show world as intro ends
+                        $("#knight").css("visibility", "visible"); //que knight enter scene
                         $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+                    }
+                    else{//when intro has ended completely
+                        this.dataIsLoaded = true; //removes loading elements via *ngIf
                     }
                 },this));
 
+        //monitor knight
         $("#knight")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
                 jQuery.proxy(function(e){
@@ -78,31 +112,32 @@ export class Home  {
                         $("#knight").css("animation-name","moveOnScreen2"); //move knight back on screen
                     }
 
-                    if ($("#knight").css("animation-name") == "moveOnScreen") { //when knight enters window 1st time...
-                        $("#name").css("animation-name","fadein");
-                        $("#name").css("opacity","1");
-                        $("#name").css("visibility", "visible");
+                    if ($("#knight").css("animation-name") == "moveOnScreen") { //when knight enters window first time...
 
-                        $("#speech").css("animation-name","fadein");
+                        $("#speech").css("animation-name","fadein"); //fade in and display speech bubble
                         $("#speech").css("opacity","1");
                         $("#speech").css("visibility", "visible");
 
-                        $("#question-wrapper").css("visibility", "visible");
+                        $("#question-wrapper").css("visibility", "visible"); // the question-wrapper
+                        $("#question-wrapper").css("opacity","1");
+
+                        $("#name").css("animation-name","fadein"); //and the first question
+                        $("#name").css("opacity","1");
+                        $("#name").css("visibility", "visible");
+
 
                     }
 
-                    if ($("#knight").css("animation-name") == "crossBridge") {//when night retreives item...
+                    if ($("#knight").css("animation-name") == "crossBridge") {//when night retrieves item...
 
-                        if(this.questSelectComponent.quest == "holygrail") {
-                            $("#theCanvas").css("visibility", "visible");
-                            $("#theCanvas").css("animation-name", "fadein");
+                        if(this.questSelectComponent.quest == "holygrail") { //if seeking the holy grail
+                            $("#theCanvas").css("animation-name", "fadein"); //fade in
                         }
                         else {
-                            $("#theCanvas").css("visibility", "visible");  //make canvas visible
-                            $("#theCanvas").css("animation-name", "grow");// and expand it ***
+                            $("#theCanvas").css("animation-name", "grow");//else grow
                         }
-
-                        $("#theCanvas").css("animation-duration", "2s");
+                        $("#theCanvas").css("visibility", "visible"); //show canvas
+                        $("#theCanvas").css("animation-duration", "2s"); //quickly
                     }
                     //note: jQuery.proxy allows reference to 'this'
                 },this));
@@ -111,13 +146,16 @@ export class Home  {
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
                 jQuery.proxy(function(e){ //when resume expands completely
                     $("#close").css("visibility","visible"); //show close button
+
                     $("#knight").css("transform","none"); //reset knight direction
                     $("#knight").css("left","21%"); //and position
                     $("#poof").css("animation","toggle"); //toggle-reset poof cloud
                     $("#gatekeeper").css("visibility","visible"); //show gatekeeper
-                     if(this.questSelectComponent.quest != "holygrail") {
-                        $("#wrapper").css("overflow-y", "scroll");
-                     } //enable scrolling
+
+                    if(this.questSelectComponent.quest != "holygrail") { //for non-grail missions
+                        $("#wrapper").css("overflow-y", "scroll"); //enable scrolling for documents
+                        $("#download").css("visibility","visible"); //show download button
+                    }
                 },this));
 
 
@@ -148,7 +186,6 @@ export class Home  {
                         $("#speech").css("visibility", "hidden");
                     }
                 },this));
-
 
     }
 
@@ -186,8 +223,8 @@ export class Home  {
         $("#speech").css("opacity","0");
         $("#speech").css("z-index","0");
         $("#question-wrapper").css("animation-name","fadeout")
-        $("#speech").css("opacity","0");
-        $("#speech").css("z-index","0");
+        $("#question-wrapper").css("opacity","0");
+        $("#question-wrapper").css("z-index","0");
         this.color = this.colorSelectComponent.color;
     }
 
@@ -197,6 +234,7 @@ export class Home  {
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
         var pdfPath = '../../assets/docs/Ryan Coughlin Resume.pdf';
+        $("a").attr("href", pdfPath); //set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
         console.log(loadingTask);
@@ -210,10 +248,9 @@ export class Home  {
             return pdfDocument.getPage(1).then(function (pdfPage) {
                 // Display page on the existing canvas with 100% scale.
 
-                //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
 
-                var viewport = pdfPage.getViewport(4.0);
+                var viewport = pdfPage.getViewport(3.0);
 
                 (<HTMLInputElement>canvas).width = viewport.width;
                 (<HTMLInputElement>canvas).height = viewport.height;
@@ -230,11 +267,13 @@ export class Home  {
         $("#theCanvas").css("height","auto");
     }
 
+    //shows sample of chinese writing
     showEssay(){
         this.colorToNext()
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
         var pdfPath = '../../assets/docs/chinessay.pdf';
+        $("a").attr("href", pdfPath); // set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
         console.log(loadingTask);
@@ -254,11 +293,15 @@ export class Home  {
                 //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
 
-                var viewport = pdfPage.getViewport(4.0);
+                var viewport = pdfPage.getViewport(3.0);
 
-                (<HTMLInputElement>canvas).width = viewport.width;
-                (<HTMLInputElement>canvas).height = viewport.height;
+                // (<HTMLInputElement>canvas).width = viewport.width;
+                // (<HTMLInputElement>canvas).height = viewport.height;
                 var ctx = (<HTMLCanvasElement> canvas).getContext('2d');
+
+                ctx.canvas.width = viewport.width;
+                ctx.canvas.height = viewport.height;
+
                 var renderTask = pdfPage.render({
                     canvasContext: ctx,
                     viewport: viewport
@@ -271,6 +314,7 @@ export class Home  {
         $("#theCanvas").css("height","auto");
     }
 
+    //shows holy grail
     showGrail() {
         this.colorToNext()
         var canvas = document.getElementById('theCanvas');
@@ -286,6 +330,7 @@ export class Home  {
     closeDocument(){
         $("#theCanvas").css("visibility","hidden"); //hides resume canvas
         $("#close").css("visibility","hidden"); //hides close button
+        $("#download").css("visibility","hidden"); //hides close button
         $("#wrapper").css("overflow-y", "hidden"); //disables scroll
 
         $("#replay").css("visibility","visible"); //show replay button
@@ -310,11 +355,5 @@ export class Home  {
         $("#wrapper").css("animation-duration", "1s");
         $("#knight").css("animation-name", "moveOnScreen");
         $("#knight").css("animation-duration", "3s");
-    }
-
-    testGrail(){
-        $("#knight").css("animation", "crossBridge"); //knight crosses the bridge
-        $("#knight").css("animation-duration", "1s");
-        this.showGrail();
     }
 }

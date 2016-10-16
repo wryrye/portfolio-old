@@ -190,6 +190,15 @@
     cursor: pointer;
 }
 
+#download{
+    width: 5%;
+    left:90%;
+    position: absolute;
+    visibility: hidden;
+    z-index: 3;
+    cursor: pointer;
+}
+
 #replay{
     position: absolute;
     top:10%;
