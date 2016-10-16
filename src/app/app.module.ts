@@ -17,6 +17,7 @@ import { AppState } from './app.service';
 import { Home } from './home';
 import { About } from './about';
 import { NoContent } from './no-content';
+import {ColorSelectComponent} from "./home/Components/ColorSelectComponent/color-select.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -30,6 +31,7 @@ const APP_PROVIDERS = [
 @NgModule({
   bootstrap: [ App ],
   declarations: [
+      ColorSelectComponent,
     App,
     About,
     Home,

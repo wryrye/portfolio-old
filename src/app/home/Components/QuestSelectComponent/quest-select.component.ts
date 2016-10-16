@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter} from '@angular/core';
+import {ColorSelectComponent} from "../ColorSelectComponent/color-select.component";
 
 
 @Component({

@@ -15,9 +15,9 @@ import 'pdfjs-dist';
     ],
     directives: [
         // XLarge,
+        ColorSelectComponent,
         NameSelectComponent,
         QuestSelectComponent,
-        ColorSelectComponent,
         PageScroll
     ],
     pipes: [ ],

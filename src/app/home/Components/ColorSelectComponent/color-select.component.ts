@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter} from '@angular/core';
+import {QuestSelectComponent} from "../QuestSelectComponent/quest-select.component";
 
 
 @Component({

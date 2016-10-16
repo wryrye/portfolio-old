@@ -18774,7 +18774,7 @@ if (typeof requirejs !== 'undefined' && requirejs.toUrl) {
 var dynamicLoaderSupported = typeof requirejs !== 'undefined' && requirejs.load;
 var fakeWorkerFilesLoader = useRequireEnsure ? (function (callback) {
   __webpack_require__.e/* nsure */(1).catch(function(err) { __webpack_require__.oe(err); }).then((function () {
-    var worker = __webpack_require__(769);
+    var worker = __webpack_require__(767);
     callback(worker.WorkerMessageHandler);
   }).bind(null, __webpack_require__));
 }) : dynamicLoaderSupported ? (function (callback) {
@@ -21166,7 +21166,7 @@ exports.PageScrollManager = PageScrollManager;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(573));
+__export(__webpack_require__(574));
 
 
 /***/ },
@@ -21221,12 +21221,74 @@ exports.AppState = AppState;
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(581));
+/* WEBPACK VAR INJECTION */(function($) {"use strict";
+var core_1 = __webpack_require__(0);
+var ColorSelectComponent = (function () {
+    function ColorSelectComponent() {
+        this.resumeRequest = new core_1.EventEmitter();
+        this.launchRequest = new core_1.EventEmitter();
+        this.essayRequest = new core_1.EventEmitter();
+        this.grailRequest = new core_1.EventEmitter();
+    }
+    ColorSelectComponent.prototype.ngOnInit = function () {
+    };
+    ColorSelectComponent.prototype.ngOnChanges = function () {
+    };
+    ColorSelectComponent.prototype.selectColor = function (color) {
+        console.log(this.quest);
+        if (color == "launch") {
+            this.launchKnight();
+        }
+        else {
+            $("#wrapper").css("cursor", "url(../../../../assets/img/" + color + "sword.png), auto");
+            if (this.quest == 'essay') {
+                this.switchToEssay();
+            }
+            else if (this.quest == 'holygrail') {
+                this.switchToGrail();
+            }
+            else {
+                this.switchToResume();
+            }
+        }
+    };
+    ColorSelectComponent.prototype.switchToResume = function () {
+        console.log('switching to resume...');
+        this.resumeRequest.emit();
+    };
+    ColorSelectComponent.prototype.switchToEssay = function () {
+        console.log('switching to essay...');
+        this.essayRequest.emit();
+    };
+    ColorSelectComponent.prototype.launchKnight = function () {
+        console.log('3..2..1.. launching!');
+        this.launchRequest.emit();
+    };
+    ColorSelectComponent.prototype.switchToGrail = function () {
+        console.log('switching to essay...');
+        this.grailRequest.emit();
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], ColorSelectComponent.prototype, "quest", void 0);
+    ColorSelectComponent = __decorate([
+        core_1.Component({
+            selector: 'color-select',
+            providers: [],
+            directives: [],
+            pipes: [],
+            styles: [__webpack_require__(759)],
+            template: __webpack_require__(729),
+            events: ['resumeRequest', 'launchRequest', 'essayRequest', 'grailRequest']
+        }), 
+        __metadata('design:paramtypes', [])
+    ], ColorSelectComponent);
+    return ColorSelectComponent;
+}());
+exports.ColorSelectComponent = ColorSelectComponent;
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(179)))
 
 /***/ },
 
@@ -21238,12 +21300,25 @@ __export(__webpack_require__(581));
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(586));
+__export(__webpack_require__(581));
 
 
 /***/ },
 
-/***/ 444:
+/***/ 392:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(584));
+
+
+/***/ },
+
+/***/ 445:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21252,12 +21327,12 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 // App
-__export(__webpack_require__(575));
+__export(__webpack_require__(576));
 
 
 /***/ },
 
-/***/ 572:
+/***/ 573:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21438,7 +21513,7 @@ exports.PageScroll = PageScroll;
 
 /***/ },
 
-/***/ 573:
+/***/ 574:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21500,7 +21575,7 @@ exports.About = About;
 
 /***/ },
 
-/***/ 574:
+/***/ 575:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21531,7 +21606,7 @@ var App = (function () {
             selector: 'app',
             encapsulation: core_1.ViewEncapsulation.None,
             styles: [
-                __webpack_require__(760)
+                __webpack_require__(758)
             ],
             template: "\n    <main>\n      <router-outlet></router-outlet>\n    </main>\n  "
         }), 
@@ -21552,7 +21627,7 @@ exports.App = App;
 
 /***/ },
 
-/***/ 575:
+/***/ 576:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21567,14 +21642,15 @@ var hmr_1 = __webpack_require__(123);
  * Platform and Environment providers/directives/pipes
  */
 var environment_1 = __webpack_require__(279);
-var app_routes_1 = __webpack_require__(577);
+var app_routes_1 = __webpack_require__(578);
 // App is our top level component
-var app_component_1 = __webpack_require__(574);
-var app_resolver_1 = __webpack_require__(576);
+var app_component_1 = __webpack_require__(575);
+var app_resolver_1 = __webpack_require__(577);
 var app_service_1 = __webpack_require__(389);
-var home_1 = __webpack_require__(390);
+var home_1 = __webpack_require__(391);
 var about_1 = __webpack_require__(388);
-var no_content_1 = __webpack_require__(391);
+var no_content_1 = __webpack_require__(392);
+var color_select_component_1 = __webpack_require__(390);
 // Application wide providers
 var APP_PROVIDERS = app_resolver_1.APP_RESOLVER_PROVIDERS.concat([
     app_service_1.AppState
@@ -21613,6 +21689,7 @@ var AppModule = (function () {
         core_1.NgModule({
             bootstrap: [app_component_1.App],
             declarations: [
+                color_select_component_1.ColorSelectComponent,
                 app_component_1.App,
                 about_1.About,
                 home_1.Home,
@@ -21639,14 +21716,14 @@ exports.AppModule = AppModule;
 
 /***/ },
 
-/***/ 576:
+/***/ 577:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var Observable_1 = __webpack_require__(6);
-__webpack_require__(739);
+__webpack_require__(737);
 var DataResolver = (function () {
     function DataResolver() {
     }
@@ -21668,99 +21745,24 @@ exports.APP_RESOLVER_PROVIDERS = [
 
 /***/ },
 
-/***/ 577:
+/***/ 578:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var home_1 = __webpack_require__(390);
+var home_1 = __webpack_require__(391);
 var about_1 = __webpack_require__(388);
-var no_content_1 = __webpack_require__(391);
+var no_content_1 = __webpack_require__(392);
 exports.ROUTES = [
     { path: '', component: home_1.Home },
     { path: 'home', component: home_1.Home },
     { path: 'about', component: about_1.About },
     {
-        path: 'detail', loadChildren: function () { return __webpack_require__.e/* System.import */(0).then(__webpack_require__.bind(null, 768)).then(function (mod) { return mod.__esModule ? mod.default : mod; }); }
+        path: 'detail', loadChildren: function () { return __webpack_require__.e/* System.import */(0).then(__webpack_require__.bind(null, 766)).then(function (mod) { return mod.__esModule ? mod.default : mod; }); }
     },
     { path: '**', component: no_content_1.NoContent },
 ];
 
-
-/***/ },
-
-/***/ 578:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {"use strict";
-var core_1 = __webpack_require__(0);
-var ColorSelectComponent = (function () {
-    function ColorSelectComponent() {
-        this.resumeRequest = new core_1.EventEmitter();
-        this.launchRequest = new core_1.EventEmitter();
-        this.essayRequest = new core_1.EventEmitter();
-        this.grailRequest = new core_1.EventEmitter();
-    }
-    ColorSelectComponent.prototype.ngOnInit = function () {
-    };
-    ColorSelectComponent.prototype.ngOnChanges = function () {
-    };
-    ColorSelectComponent.prototype.selectColor = function (color) {
-        console.log(this.quest);
-        if (color == "launch") {
-            this.launchKnight();
-        }
-        else {
-            $("#wrapper").css("cursor", "url(../../../../assets/img/" + color + "sword.png), auto");
-            if (this.quest == 'essay') {
-                this.switchToEssay();
-            }
-            else if (this.quest == 'holygrail') {
-                this.switchToGrail();
-            }
-            else {
-                this.switchToResume();
-            }
-        }
-    };
-    ColorSelectComponent.prototype.switchToResume = function () {
-        console.log('switching to resume...');
-        this.resumeRequest.emit();
-    };
-    ColorSelectComponent.prototype.switchToEssay = function () {
-        console.log('switching to essay...');
-        this.essayRequest.emit();
-    };
-    ColorSelectComponent.prototype.launchKnight = function () {
-        console.log('3..2..1.. launching!');
-        this.launchRequest.emit();
-    };
-    ColorSelectComponent.prototype.switchToGrail = function () {
-        console.log('switching to essay...');
-        this.grailRequest.emit();
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ColorSelectComponent.prototype, "quest", void 0);
-    ColorSelectComponent = __decorate([
-        core_1.Component({
-            selector: 'color-select',
-            providers: [],
-            directives: [],
-            pipes: [],
-            styles: [__webpack_require__(761)],
-            template: __webpack_require__(731),
-            events: ['resumeRequest', 'launchRequest', 'essayRequest', 'grailRequest']
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ColorSelectComponent);
-    return ColorSelectComponent;
-}());
-exports.ColorSelectComponent = ColorSelectComponent;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(179)))
 
 /***/ },
 
@@ -21792,8 +21794,8 @@ var NameSelectComponent = (function () {
             providers: [],
             directives: [],
             pipes: [],
-            styles: [__webpack_require__(762)],
-            template: __webpack_require__(732),
+            styles: [__webpack_require__(760)],
+            template: __webpack_require__(730),
             events: ['switchRequest']
         }), 
         __metadata('design:paramtypes', [])
@@ -21840,8 +21842,8 @@ var QuestSelectComponent = (function () {
             providers: [],
             directives: [],
             pipes: [],
-            styles: [__webpack_require__(763)],
-            template: __webpack_require__(733),
+            styles: [__webpack_require__(761)],
+            template: __webpack_require__(731),
             events: ['switchRequest']
         }), 
         __metadata('design:paramtypes', [])
@@ -21860,55 +21862,86 @@ exports.QuestSelectComponent = QuestSelectComponent;
 /* WEBPACK VAR INJECTION */(function($, jQuery) {"use strict";
 var core_1 = __webpack_require__(0);
 var title_1 = __webpack_require__(582);
-var x_large_1 = __webpack_require__(584);
+// import { XLarge } from './x-large';
 var name_select_component_1 = __webpack_require__(579);
 var quest_select_component_1 = __webpack_require__(580);
-var color_select_component_1 = __webpack_require__(578);
-var ng2_page_scroll_1 = __webpack_require__(729);
+var color_select_component_1 = __webpack_require__(390);
+var ng2_page_scroll_1 = __webpack_require__(727);
 __webpack_require__(271);
 var Home = (function () {
     function Home() {
     }
     Home.prototype.ngOnInit = function () {
+        //modified settings for mobile
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             console.log('hello mobile user!');
             $(".question").css("font-size", "2em");
             $(".button").css("font-size", "1em");
             $("#replay").css("font-size", "4em");
         }
+        //removes loading screens when true
+        this.dataIsLoaded = false;
+        //paints canvas with loading screen in case document does not load in time
+        var canvas = document.getElementById('theCanvas');
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "white";
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerWidth * 1.414;
+        ctx.rect(0, 0, window.innerWidth, window.innerWidth * 1.414);
+        ctx.fill();
+        ctx.font = "6em goudy_old_stylebold";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.fillText("LOADING", window.innerWidth / 2, window.innerHeight / 2);
     };
     Home.prototype.ngAfterViewInit = function () {
-        //use CSS animation endings for signalling/transitioning
-        $("#loaded")
-            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
-            $("#loaded").css("visibility", "hidden"); //hide loading page
-            $("#knight").css("visibility", "visible"); //show knight
-            $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+        //use image load status and CSS animation endings for signalling/transitioning
+        //when intro image is loaded
+        $("#intro")
+            .on("load", jQuery.proxy(function (e) {
+            console.log("intro loaded");
+            $("#loading2").css("visibility", "hidden"); //hide loading animation
+            $("#intro").css("visibility", "visible"); //show intro
+            $("#intro").css("animation-name", "fadein2"); //animate intro
         }, this));
+        $("#intro")
+            .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
+            if ($("#intro").css("animation-name") == "fadein2") {
+                $("#intro").css("animation-duration", "2s"); //animate the ending!
+                $("#intro").css("animation-name", "fadeout2"); //animate the ending!
+                $("#wrapper").css("visibility", "visible"); //show world as intro ends
+                $("#knight").css("visibility", "visible"); //que knight enter scene
+                $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
+            }
+            else {
+                this.dataIsLoaded = true; //removes loading elements via *ngIf
+            }
+        }, this));
+        //monitor knight
         $("#knight")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
             if ($("#knight").css("animation-name") == "launch") {
                 $("#knight").css("animation-name", "moveOnScreen2"); //move knight back on screen
             }
             if ($("#knight").css("animation-name") == "moveOnScreen") {
-                $("#name").css("animation-name", "fadein");
-                $("#name").css("opacity", "1");
-                $("#name").css("visibility", "visible");
-                $("#speech").css("animation-name", "fadein");
+                $("#speech").css("animation-name", "fadein"); //fade in and display speech bubble
                 $("#speech").css("opacity", "1");
                 $("#speech").css("visibility", "visible");
-                $("#question-wrapper").css("visibility", "visible");
+                $("#question-wrapper").css("visibility", "visible"); // the question-wrapper
+                $("#question-wrapper").css("opacity", "1");
+                $("#name").css("animation-name", "fadein"); //and the first question
+                $("#name").css("opacity", "1");
+                $("#name").css("visibility", "visible");
             }
             if ($("#knight").css("animation-name") == "crossBridge") {
                 if (this.questSelectComponent.quest == "holygrail") {
-                    $("#theCanvas").css("visibility", "visible");
-                    $("#theCanvas").css("animation-name", "fadein");
+                    $("#theCanvas").css("animation-name", "fadein"); //fade in
                 }
                 else {
-                    $("#theCanvas").css("visibility", "visible"); //make canvas visible
-                    $("#theCanvas").css("animation-name", "grow"); // and expand it ***
+                    $("#theCanvas").css("animation-name", "grow"); //else grow
                 }
-                $("#theCanvas").css("animation-duration", "2s");
+                $("#theCanvas").css("visibility", "visible"); //show canvas
+                $("#theCanvas").css("animation-duration", "2s"); //quickly
             }
             //note: jQuery.proxy allows reference to 'this'
         }, this));
@@ -21920,8 +21953,9 @@ var Home = (function () {
             $("#poof").css("animation", "toggle"); //toggle-reset poof cloud
             $("#gatekeeper").css("visibility", "visible"); //show gatekeeper
             if (this.questSelectComponent.quest != "holygrail") {
-                $("#wrapper").css("overflow-y", "scroll");
-            } //enable scrolling
+                $("#wrapper").css("overflow-y", "scroll"); //enable scrolling for documents
+                $("#download").css("visibility", "visible"); //show download button
+            }
         }, this));
         $("#color")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", jQuery.proxy(function (e) {
@@ -21977,8 +22011,8 @@ var Home = (function () {
         $("#speech").css("opacity", "0");
         $("#speech").css("z-index", "0");
         $("#question-wrapper").css("animation-name", "fadeout");
-        $("#speech").css("opacity", "0");
-        $("#speech").css("z-index", "0");
+        $("#question-wrapper").css("opacity", "0");
+        $("#question-wrapper").css("z-index", "0");
         this.color = this.colorSelectComponent.color;
     };
     //shows Resume
@@ -21987,6 +22021,7 @@ var Home = (function () {
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = __webpack_require__(271);
         var pdfPath = '../../assets/docs/Ryan Coughlin Resume.pdf';
+        $("a").attr("href", pdfPath); //set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
         console.log(loadingTask);
@@ -21997,9 +22032,8 @@ var Home = (function () {
             // Request a first page
             return pdfDocument.getPage(1).then(function (pdfPage) {
                 // Display page on the existing canvas with 100% scale.
-                //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
-                var viewport = pdfPage.getViewport(4.0);
+                var viewport = pdfPage.getViewport(3.0);
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
                 var ctx = canvas.getContext('2d');
@@ -22014,11 +22048,13 @@ var Home = (function () {
         });
         $("#theCanvas").css("height", "auto");
     };
+    //shows sample of chinese writing
     Home.prototype.showEssay = function () {
         this.colorToNext();
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = __webpack_require__(271);
         var pdfPath = '../../assets/docs/chinessay.pdf';
+        $("a").attr("href", pdfPath); // set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
         console.log(loadingTask);
@@ -22031,10 +22067,12 @@ var Home = (function () {
                 // Display page on the existing canvas with 100% scale.
                 //var viewport = pdfPage.getViewport(1);
                 var canvas = document.getElementById('theCanvas');
-                var viewport = pdfPage.getViewport(4.0);
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                var viewport = pdfPage.getViewport(3.0);
+                // (<HTMLInputElement>canvas).width = viewport.width;
+                // (<HTMLInputElement>canvas).height = viewport.height;
                 var ctx = canvas.getContext('2d');
+                ctx.canvas.width = viewport.width;
+                ctx.canvas.height = viewport.height;
                 var renderTask = pdfPage.render({
                     canvasContext: ctx,
                     viewport: viewport
@@ -22046,6 +22084,7 @@ var Home = (function () {
         });
         $("#theCanvas").css("height", "auto");
     };
+    //shows holy grail
     Home.prototype.showGrail = function () {
         this.colorToNext();
         var canvas = document.getElementById('theCanvas');
@@ -22060,6 +22099,7 @@ var Home = (function () {
     Home.prototype.closeDocument = function () {
         $("#theCanvas").css("visibility", "hidden"); //hides resume canvas
         $("#close").css("visibility", "hidden"); //hides close button
+        $("#download").css("visibility", "hidden"); //hides close button
         $("#wrapper").css("overflow-y", "hidden"); //disables scroll
         $("#replay").css("visibility", "visible"); //show replay button
         $("#replay").css("animation-name", "fadein");
@@ -22080,11 +22120,6 @@ var Home = (function () {
         $("#wrapper").css("animation-duration", "1s");
         $("#knight").css("animation-name", "moveOnScreen");
         $("#knight").css("animation-duration", "3s");
-    };
-    Home.prototype.testGrail = function () {
-        $("#knight").css("animation", "crossBridge"); //knight crosses the bridge
-        $("#knight").css("animation-duration", "1s");
-        this.showGrail();
     };
     __decorate([
         core_1.Input(), 
@@ -22109,15 +22144,15 @@ var Home = (function () {
                 title_1.Title,
             ],
             directives: [
-                x_large_1.XLarge,
+                // XLarge,
+                color_select_component_1.ColorSelectComponent,
                 name_select_component_1.NameSelectComponent,
                 quest_select_component_1.QuestSelectComponent,
-                color_select_component_1.ColorSelectComponent,
                 ng2_page_scroll_1.PageScroll
             ],
             pipes: [],
-            styles: [__webpack_require__(764)],
-            template: __webpack_require__(734),
+            styles: [__webpack_require__(762)],
+            template: __webpack_require__(732),
         }), 
         __metadata('design:paramtypes', [])
     ], Home);
@@ -22180,51 +22215,6 @@ exports.Title = Title;
 
 "use strict";
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(585));
-
-
-/***/ },
-
-/***/ 585:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-/*
- * Directive
- * XLarge is a simple directive to show how one is made
- */
-var XLarge = (function () {
-    function XLarge(element, renderer) {
-        // simple DOM manipulation to set font size to x-large
-        // `nativeElement` is the direct reference to the DOM element
-        // element.nativeElement.style.fontSize = 'x-large';
-        // for server/webworker support use the renderer
-        renderer.setElementStyle(element.nativeElement, 'fontSize', 'x-large');
-    }
-    XLarge = __decorate([
-        core_1.Directive({
-            selector: '[x-large]' // using [ ] means selecting attributes
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof core_1.Renderer !== 'undefined' && core_1.Renderer) === 'function' && _b) || Object])
-    ], XLarge);
-    return XLarge;
-    var _a, _b;
-}());
-exports.XLarge = XLarge;
-
-
-/***/ },
-
-/***/ 586:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
 var core_1 = __webpack_require__(0);
 var NoContent = (function () {
     function NoContent() {
@@ -22243,7 +22233,7 @@ exports.NoContent = NoContent;
 
 /***/ },
 
-/***/ 729:
+/***/ 727:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22251,42 +22241,42 @@ exports.NoContent = NoContent;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(572));
+__export(__webpack_require__(573));
 __export(__webpack_require__(387));
 __export(__webpack_require__(249));
 //# sourceMappingURL=ng2-page-scroll.js.map
 
 /***/ },
 
-/***/ 731:
+/***/ 729:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"oldstyle center question\">What is your favorite color?</div>\n<button class = \"button oldstyle\" (click)=\"selectColor('launch')\"><span>Blue... No, Yellow!</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('blue')\"><span>Blue</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('yellow')\"><span>Yellow</span></button>\n<button class = \"button oldstyle\" (click)=\"selectColor('red')\"><span>Red</span></button>\n"
 
 /***/ },
 
-/***/ 732:
+/***/ 730:
 /***/ function(module, exports) {
 
 module.exports = "<div class = \"oldstyle center question\">What is your Name?</div>\n<button class = \"button oldstyle\" (click)=\"selectName('Employer')\"><span>Sir Lancelot</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Friend')\"><span>Sir Robin</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Family')\"><span>Sir Galahad</span></button>\n<button class = \"button oldstyle\" (click)=\"selectName('Andrew Ma')\"><span>King Arthur </span></button>\n"
 
 /***/ },
 
-/***/ 733:
+/***/ 731:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"oldstyle center question\">What is your Quest?</div>\n<button class = \"button oldstyle\" (click)=\"selectQuest('resume')\"><span>Explore My Résumé</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('essay')\"><span>Venture to The Orient</span></button>\n<button class = \"button oldstyle\" (click)=\"selectQuest('holygrail')\"><span>Seek the Holy Grail</span></button>\n"
 
 /***/ },
 
-/***/ 734:
+/***/ 732:
 /***/ function(module, exports) {
 
-module.exports = "<div id = \"wrapper\">\n    <img id= 'loaded' src=\"../../assets/img/monty_python_title.png\" >\n    <img id='world' src=\"../../assets/img/world7.png\" >\n    <img id = 'bridge'  src=\"../../assets/img/bridge.png\" >\n    <img id = 'sun'  src=\"../../assets/img/sun2.png\" >\n    <img id = 'knight'  src=\"../../assets/img/knight.png\" >\n    <img id = 'gatekeeper'  src=\"../../assets/img/wizard3.png\" >\n    <img id = 'close' src=\"../../assets/img/close.png\" (click)=\"closeDocument()\">\n    <div id = 'replay' class ='oldstyle' (click)=\"replay()\">Play Again?</div>\n    <img id= 'poof' src=\"../../assets/img/poof1.png\" >\n    <img id= 'speech' src=\"../../assets/img/speech.png\" >\n    <img id= 'holygrail' src=\"../../assets/img/holygrail.jpg\" >\n\n    <div id=\"question-wrapper\">\n        <name-select class = \"center\" id = 'name'  (switchRequest) = \"nameToQuest()\" ></name-select>\n        <quest-select class = \"center\" id = 'quest' (switchRequest) = \"questToColor()\"></quest-select>\n        <color-select class = \"center\" id = 'color' (resumeRequest) = \"showResume()\" (essayRequest) = \"showEssay()\" (launchRequest) = \"launch()\" (grailRequest) = \"showGrail()\"  [quest]=\"this.quest\"></color-select>\n    </div>\n\n    <canvas id = 'theCanvas'></canvas>\n    <!--<container  class = \"container\" id=\"pageContainer\" >  </container>-->\n</div>\n"
+module.exports = "<div id = \"loading2\" class = \"loading oldstyle\" *ngIf = \"!this.dataIsLoaded\">LOADING</div>\n<img id= 'intro' src=\"../../assets/img/monty_python_title.png\" *ngIf = \"!this.dataIsLoaded\">\n<div id = \"wrapper\">\n    <img id='world' src=\"../../assets/img/world7.png\" >\n    <img id = 'bridge'  src=\"../../assets/img/bridge.png\" >\n    <img id = 'sun'  src=\"../../assets/img/sun2.png\" >\n    <img id = 'knight'  src=\"../../assets/img/knight.png\" >\n    <img id = 'gatekeeper'  src=\"../../assets/img/wizard3.png\" >\n    <img id = 'close' src=\"../../assets/img/close.png\" (click)=\"closeDocument()\">\n    <a href = 'fileURL' target=\"_blank\"><img id = 'download'   src=\"../../assets/img/download.png\"></a>\n    <div id = 'replay' class ='oldstyle' (click)=\"replay()\">Play Again?</div>\n    <img id= 'poof' src=\"../../assets/img/poof1.png\" >\n    <img id= 'speech' src=\"../../assets/img/speech.png\" >\n    <img id= 'holygrail' src=\"../../assets/img/holygrail.jpg\" >\n\n    <div id=\"question-wrapper\">\n        <name-select class = \"center\" id = 'name'  (switchRequest) = \"nameToQuest()\" ></name-select>\n        <quest-select class = \"center\" id = 'quest' (switchRequest) = \"questToColor()\"></quest-select>\n        <color-select class = \"center\" id = 'color' (resumeRequest) = \"showResume()\" (essayRequest) = \"showEssay()\" (launchRequest) = \"launch()\" (grailRequest) = \"showGrail()\"  [quest]=\"this.quest\"></color-select>\n    </div>\n\n    <canvas id = 'theCanvas'></canvas>\n    <!--<container  class = \"container\" id=\"pageContainer\" >  </container>-->\n</div>\n"
 
 /***/ },
 
-/***/ 739:
+/***/ 737:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22298,10 +22288,24 @@ Observable_1.Observable.of = of_1.of;
 
 /***/ },
 
-/***/ 760:
+/***/ 758:
 /***/ function(module, exports) {
 
 module.exports = "html, body{\n  height: 100%;\n  font-family: Arial, Helvetica, sans-serif\n}\n\nspan.active {\n  background-color: gray;\n}\n"
+
+/***/ },
+
+/***/ 759:
+/***/ function(module, exports) {
+
+module.exports = ""
+
+/***/ },
+
+/***/ 760:
+/***/ function(module, exports) {
+
+module.exports = "\n"
 
 /***/ },
 
@@ -22315,25 +22319,11 @@ module.exports = ""
 /***/ 762:
 /***/ function(module, exports) {
 
-module.exports = "\n"
+module.exports = "#name{\n    z-index: 3;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#quest{\n    z-index: 2;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#color{\n    z-index: 1;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n.center{\n    width: 100%;\n    text-align: center;\n    position: absolute;\n    left: 0%;\n    visibility: hidden;\n}\n\n#speech{\n    position: absolute;\n    left: 30%;\n    width:70%;\n    height:60%;\n    opacity: 0;\n    animation-duration: 1.5s;\n    visibility: hidden;\n\n}\n\n#world{\n    z-index: -1;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n\n#bridge{\n    z-index: -1;\n    position: absolute;\n    width: 34%;\n    height: 50%;\n    left:73%;\n    top: 53%;\n}\n\n@keyframes shine {\n    0% {transform: rotate(5deg);transform: skewY(-5deg);}\n    55% {transform: rotate(-5deg);transform: skewY(5deg);}\n    100% {transform: rotate(5deg);transform: skewY(-5deg);}\n}\n\n\n#sun{\n    z-index: 1;\n    position: absolute;\n    width: 20%;\n    height: 40%;\n    animation-name: shine;\n    animation-duration: 5s;\n    animation-iteration-count: infinite;\n    transform: rotate(5deg);\n}\n\n@keyframes fadeout {\n    from {opacity: 1;}\n    to {opacity: 0;}\n}\n\n@keyframes fadein {\n    from {opacity: 0;}\n    to {opacity: 1;}\n}\n\n\n@keyframes crossBridge {\n    0% {\n        left: 21%;\n        transform: none;\n    }\n    30% {\n        left:21%;\n        transform: none;\n    }\n    40%{\n        top: 43%;\n    }\n    48%{\n        top: 23%;\n    }\n    65% {\n        left: 110%;\n        transform: none;\n    }\n    66%{\n        transform: scaleX(-1);\n    }\n    73%{\n        top: 23%;\n    }\n    82%{\n        top: 43%;\n    }\n    100% {\n        left: 35%;\n        transform: scaleX(-1);\n    }\n}\n\n@keyframes moveOnScreen {\n    0% {left: -25%;}\n    25% {left: -25%;}\n    100% {left: 21%;}\n}\n\n@keyframes moveOnScreen2 {\n    0% {left: -25%;}\n    100% {left: 21%;}\n}\n\n\n@keyframes launch {\n    0%{top:43%;}\n    100%{top:-80%;}\n}\n\n#knight{\n    z-index: 2;\n    transform: none;\n    animation-name:none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 25%;\n    height: 50.5%;\n    left: 21%;\n    top:43%;\n\n}\n\n@keyframes backUp {\n    0% {transform:scale(1,1);}\n    100% {transform: scale(0,0);}\n\n    /*0%{top: 53%}*/\n    /*100%{top: 20%}*/\n}\n\n#gatekeeper{\n    z-index: 1;\n    position: absolute;\n    width: 18%;\n    height: 40%;\n    left: 56%;\n    top:53%;\n}\n\n.container{\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n@keyframes grow {\n    0% {transform: scale(0,0);}\n    100% {transform: scale(1,1);}\n}\n\n\n#theCanvas{\n    position: relative;\n    animation-duration: 6s;\n    width: 100%;\n    visibility: hidden;\n    z-index: 2;\n}\n\n#close{\n    width: 5%;\n    left:95%;\n    position: absolute;\n    visibility: hidden;\n    z-index: 3;\n    cursor: pointer;\n}\n\n#download{\n    width: 5%;\n    left:90%;\n    position: absolute;\n    visibility: hidden;\n    z-index: 3;\n    cursor: pointer;\n}\n\n#replay{\n    position: absolute;\n    top:10%;\n    height:10%;\n    font-size: 6em;\n    width:60%;\n    text-align: center;\n    left: 40%;\n    visibility: hidden;\n    cursor:pointer;\n    animation-duration: 1.5s;\n\n}\n@keyframes explode {\n    0%{opacity:1; }\n    30%{opacity:1; }\n    100%{opacity:0; }\n}\n\n#poof{\n    z-index: 0;\n    opacity: 0;\n    position: absolute;\n    width: 36%;\n    height: 65%;\n    left: 49%;\n    top:45%;\n\n\n}\n#holygrail{\n    animation-name: none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 27%;\n    height: 81.5%;\n    left: 36%;\n    top:19%;\n}\n\n#question-wrapper{\n    overflow-x: hidden;\n    overflow-y: auto;\n    width: 60%;\n    text-align: center;\n    position: absolute;\n    left: 35%;\n    height: 30%;\n    top: 7%;\n    visibility: hidden;\n    animation-duration: 1.5s;\n}"
 
 /***/ },
 
 /***/ 763:
-/***/ function(module, exports) {
-
-module.exports = ""
-
-/***/ },
-
-/***/ 764:
-/***/ function(module, exports) {
-
-module.exports = "#name{\n    z-index: 3;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#quest{\n    z-index: 2;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n#color{\n    z-index: 1;\n    opacity: 0;\n    animation-duration: 1.5s;\n}\n\n.center{\n    width: 100%;\n    text-align: center;\n    position: absolute;\n    left: 0%;\n    visibility: hidden;\n}\n\n#speech{\n    position: absolute;\n    left: 30%;\n    width:70%;\n    height:60%;\n    opacity: 0;\n    animation-duration: 1.5s;\n    visibility: hidden;\n\n}\n\n#world{\n    z-index: -1;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n\n#bridge{\n    z-index: -1;\n    position: absolute;\n    width: 34%;\n    height: 50%;\n    left:73%;\n    top: 53%;\n}\n\n@keyframes shine {\n    0% {transform: rotate(5deg);transform: skewY(-5deg);}\n    55% {transform: rotate(-5deg);transform: skewY(5deg);}\n    100% {transform: rotate(5deg);transform: skewY(-5deg);}\n}\n\n\n#sun{\n    z-index: 1;\n    position: absolute;\n    width: 20%;\n    height: 40%;\n    animation-name: shine;\n    animation-duration: 5s;\n    animation-iteration-count: infinite;\n    transform: rotate(5deg);\n}\n\n@keyframes fadeout {\n    from {opacity: 1;}\n    to {opacity: 0;}\n}\n\n@keyframes fadein {\n    from {opacity: 0;}\n    to {opacity: 1;}\n}\n\n\n@keyframes crossBridge {\n    0% {\n        left: 21%;\n        transform: none;\n    }\n    30% {\n        left:21%;\n        transform: none;\n    }\n    40%{\n        top: 43%;\n    }\n    48%{\n        top: 23%;\n    }\n    65% {\n        left: 110%;\n        transform: none;\n    }\n    66%{\n        transform: scaleX(-1);\n    }\n    73%{\n        top: 23%;\n    }\n    82%{\n        top: 43%;\n    }\n    100% {\n        left: 35%;\n        transform: scaleX(-1);\n    }\n}\n\n@keyframes moveOnScreen {\n    0% {left: -25%;}\n    25% {left: -25%;}\n    100% {left: 21%;}\n}\n\n@keyframes moveOnScreen2 {\n    0% {left: -25%;}\n    100% {left: 21%;}\n}\n\n\n@keyframes launch {\n    0%{top:43%;}\n    100%{top:-80%;}\n}\n\n#knight{\n    z-index: 2;\n    transform: none;\n    animation-name:none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 25%;\n    height: 50.5%;\n    left: 21%;\n    top:43%;\n\n}\n\n@keyframes backUp {\n    0% {transform:scale(1,1);}\n    100% {transform: scale(0,0);}\n\n    /*0%{top: 53%}*/\n    /*100%{top: 20%}*/\n}\n\n#gatekeeper{\n    z-index: 1;\n    position: absolute;\n    width: 18%;\n    height: 40%;\n    left: 56%;\n    top:53%;\n}\n\n.container{\n    position: absolute;\n    width: 100%;\n    height: 100%;\n}\n@keyframes grow {\n    0% {transform: scale(0,0);}\n    100% {transform: scale(1,1);}\n}\n\n\n#theCanvas{\n    position: relative;\n    animation-duration: 6s;\n    width: 100%;\n    visibility: hidden;\n    z-index: 2;\n}\n\n#close{\n    width: 5%;\n    left:95%;\n    position: absolute;\n    visibility: hidden;\n    z-index: 3;\n    cursor: pointer;\n}\n\n#replay{\n    position: absolute;\n    top:10%;\n    height:10%;\n    font-size: 6em;\n    width:60%;\n    text-align: center;\n    left: 40%;\n    visibility: hidden;\n    cursor:pointer;\n    animation-duration: 1.5s;\n\n}\n@keyframes explode {\n    0%{opacity:1; }\n    30%{opacity:1; }\n    100%{opacity:0; }\n}\n\n#poof{\n    z-index: 0;\n    opacity: 0;\n    position: absolute;\n    width: 36%;\n    height: 65%;\n    left: 49%;\n    top:45%;\n\n\n}\n#holygrail{\n    animation-name: none;\n    animation-duration: 3s;\n    position: absolute;\n    visibility: hidden;\n    width: 27%;\n    height: 81.5%;\n    left: 36%;\n    top:19%;\n}\n\n#question-wrapper{\n    overflow-x: hidden;\n    overflow-y: auto;\n    width: 60%;\n    text-align: center;\n    position: absolute;\n    left: 35%;\n    height: 30%;\n    top: 7%;\n    visibility: hidden;\n    animation-duration: 1.5s;\n}"
-
-/***/ },
-
-/***/ 765:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22348,7 +22338,7 @@ var hmr_1 = __webpack_require__(123);
  * App Module
  * our top level module that holds all of our components
  */
-var app_1 = __webpack_require__(444);
+var app_1 = __webpack_require__(445);
 /*
  * Bootstrap our Angular app with a top level NgModule
  */
@@ -22392,5 +22382,5 @@ hmr_1.bootloader(main);
 
 /***/ }
 
-},[765]);
+},[763]);
 //# sourceMappingURL=main.map
