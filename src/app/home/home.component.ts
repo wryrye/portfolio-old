@@ -75,32 +75,32 @@ export class Home  {
 
     ngAfterViewInit(){
 
-        //use image load status and CSS animation endings for signalling/transitioning
+        /**use image load status and CSS animation endings for signals and transitioning**/
 
-        //when intro image is loaded
+
         $("#intro")
             .on("load",
-                jQuery.proxy(function(e) {
+                jQuery.proxy(function(e) {  //when intro image is loaded...
                     console.log("intro loaded")
                     $("#loading2").css("visibility", "hidden"); //hide loading animation
-                    $("#intro").css("visibility", "visible"); //show intro
-                    $("#intro").css("animation-name", "fadein2");//animate intro
+                    $("#intro").css("visibility", "visible"); //show intro image
+                    $("#intro").css("animation-name", "fadein2");//animate intro image
 
                 },this));
 
         $("#intro")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-                jQuery.proxy(function(e){//initiate intro ending
+                jQuery.proxy(function(e){//once intro image has faded in...
                     if($("#intro").css("animation-name") == "fadein2") {
-                        $("#intro").css("animation-duration", "2s"); //animate the ending!
-                        $("#intro").css("animation-name","fadeout2");//animate the ending!
+                        $("#intro").css("animation-duration", "2s");
+                        $("#intro").css("animation-name","fadeout2");//intiate fade out!
 
-                        $("#wrapper").css("visibility","visible");//show world as intro ends
+                        $("#wrapper").css("visibility","visible");//show world as intro fades out
                         $("#knight").css("visibility", "visible"); //que knight enter scene
                         $("#knight").css("animation-name", "moveOnScreen"); //and animate him!
                     }
                     else{//when intro has ended completely
-                        this.dataIsLoaded = true; //removes loading elements via *ngIf
+                        this.dataIsLoaded = true; //removes loading/intro elements via *ngIf directive
                     }
                 },this));
 
@@ -137,15 +137,15 @@ export class Home  {
                             $("#theCanvas").css("animation-name", "grow");//else grow
                         }
                         $("#theCanvas").css("visibility", "visible"); //show canvas
-                        $("#theCanvas").css("animation-duration", "2s"); //quickly
+                        $("#theCanvas").css("animation-duration", "2s"); //quickly!
                     }
-                    //note: jQuery.proxy allows reference to 'this'
+                    //note: jQuery.proxy allows reference to 'this' class
                 },this));
 
         $("#theCanvas")
             .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
                 jQuery.proxy(function(e){ //when resume expands completely
-                    $("#close").css("visibility","visible"); //show close button
+                    $("#close").css("visibility","visible"); //show close button regardless
 
                     $("#knight").css("transform","none"); //reset knight direction
                     $("#knight").css("left","21%"); //and position
@@ -153,8 +153,8 @@ export class Home  {
                     $("#gatekeeper").css("visibility","visible"); //show gatekeeper
 
                     if(this.questSelectComponent.quest != "holygrail") { //for non-grail missions
-                        $("#wrapper").css("overflow-y", "scroll"); //enable scrolling for documents
-                        $("#download").css("visibility","visible"); //show download button
+                        $("#wrapper").css("overflow-y", "scroll"); //also enable scrolling for documents
+                        $("#download").css("visibility","visible"); //and show download button
                     }
                 },this));
 
@@ -233,7 +233,7 @@ export class Home  {
         this.colorToNext()
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
-        var pdfPath = '../../assets/docs/Ryan Coughlin Resume.pdf';
+        var pdfPath = '/assets/docs/ryan_coughlin_resume.pdf';
         $("a").attr("href", pdfPath); //set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
@@ -267,12 +267,12 @@ export class Home  {
         $("#theCanvas").css("height","auto");
     }
 
-    //shows sample of chinese writing
+    //shows sample of chinese essay
     showEssay(){
         this.colorToNext()
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
-        var pdfPath = '../../assets/docs/chinessay.pdf';
+        var pdfPath = '/assets/docs/ryan_coughlin_sample_chinese.pdf';
         $("a").attr("href", pdfPath); // set download path
         pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
         var loadingTask = pdfjsLib.getDocument(pdfPath);
@@ -285,8 +285,6 @@ export class Home  {
         loadingTask.promise.then(function (pdfDocument) {
             // Request a first page
 
-
-
             return pdfDocument.getPage(1).then(function (pdfPage) {
                 // Display page on the existing canvas with 100% scale.
 
@@ -295,8 +293,6 @@ export class Home  {
 
                 var viewport = pdfPage.getViewport(3.0);
 
-                // (<HTMLInputElement>canvas).width = viewport.width;
-                // (<HTMLInputElement>canvas).height = viewport.height;
                 var ctx = (<HTMLCanvasElement> canvas).getContext('2d');
 
                 ctx.canvas.width = viewport.width;
