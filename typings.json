@@ -1,6 +1,0 @@
-{
-  "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
-    "pdf": "registry:dt/pdf#0.0.0+20160818083505"
-  }
-}
