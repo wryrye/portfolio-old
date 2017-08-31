@@ -1,17 +1,17 @@
 <div id = "loading2" class = "loading oldstyle" *ngIf = "!this.dataIsLoaded">LOADING</div>
-<img id= 'intro' src="../../assets/img/monty_python_title.png" *ngIf = "!this.dataIsLoaded">
+<img id= 'intro' src="./assets/img/monty_python_title.png" *ngIf = "!this.dataIsLoaded">
 <div id = "wrapper">
-    <img id='world' src="../../assets/img/world7.png" >
-    <img id = 'bridge'  src="../../assets/img/bridge.png" >
-    <img id = 'sun'  src="../../assets/img/sun2.png" >
-    <img id = 'knight'  src="../../assets/img/knight.png" >
-    <img id = 'gatekeeper'  src="../../assets/img/wizard3.png" >
-    <img id = 'close' src="../../assets/img/close.png" (click)="closeDocument()">
-    <a href = 'fileURL' target="_blank"><img id = 'download'   src="../../assets/img/download.png"></a>
+    <img id='world' src="./assets/img/world7.png" >
+    <img id = 'bridge'  src="./assets/img/bridge.png" >
+    <img id = 'sun'  src="./assets/img/sun2.png" >
+    <img id = 'knight'  src="./assets/img/knight.png" >
+    <img id = 'gatekeeper'  src="./assets/img/wizard3.png" >
+    <img id = 'close' src="./assets/img/close.png" (click)="closeDocument()">
+    <a href = 'fileURL' target="_blank"><img id = 'download'   src="./assets/img/download.png"></a>
     <div id = 'replay' class ='oldstyle' (click)="replay()">Play Again?</div>
-    <img id= 'poof' src="../../assets/img/poof1.png" >
-    <img id= 'speech' src="../../assets/img/speech.png" >
-    <img id= 'holygrail' src="../../assets/img/holygrail.jpg" >
+    <img id= 'poof' src="./assets/img/poof1.png" >
+    <img id= 'speech' src="./assets/img/speech.png" >
+    <img id= 'holygrail' src="./assets/img/holygrail.jpg" >
 
     <div id="question-wrapper">
         <name-select class = "center" id = 'name'  (switchRequest) = "nameToQuest()" ></name-select>

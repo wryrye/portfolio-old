@@ -31,7 +31,7 @@ export class Home  {
     name: string;
     quest: string;
     color: string;
-    dataIsLoaded:boolean
+    dataIsLoaded:boolean;
 
     constructor() {}
 
@@ -48,7 +48,6 @@ export class Home  {
     ngOnInit(){
         //modified settings for mobile
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            console.log('hello mobile user!');
             $(".question").css("font-size", "2em");
             $(".button").css("font-size", "1em");
             $("#replay").css("font-size", "4em");
@@ -81,7 +80,6 @@ export class Home  {
         $("#intro")
             .on("load",
                 jQuery.proxy(function(e) {  //when intro image is loaded...
-                    console.log("intro loaded")
                     $("#loading2").css("visibility", "hidden"); //hide loading animation
                     $("#intro").css("visibility", "visible"); //show intro image
                     $("#intro").css("animation-name", "fadein2");//animate intro image
@@ -233,11 +231,10 @@ export class Home  {
         this.colorToNext()
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
-        var pdfPath = '/assets/docs/ryan_coughlin_resume.pdf';
+        var pdfPath = './assets/docs/ryan_coughlin_resume.pdf';
         $("a").attr("href", pdfPath); //set download path
-        pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
+        pdfjsLib.PDFJS.disableWorker = true;
         var loadingTask = pdfjsLib.getDocument(pdfPath);
-        console.log(loadingTask);
 
         var PAGE_TO_VIEW = 1;
         var SCALE = 1.0;
@@ -272,11 +269,10 @@ export class Home  {
         this.colorToNext()
         //noinspection TypeScriptUnresolvedFunction
         var pdfjsLib = require('pdfjs-dist/build/pdf.js');
-        var pdfPath = '/assets/docs/ryan_coughlin_sample_chinese.pdf';
+        var pdfPath = './assets/docs/ryan_coughlin_sample_chinese.pdf';
         $("a").attr("href", pdfPath); // set download path
-        pdfjsLib.PDFJS.workerSrc = "pdfjs-dist/build/pdf.worker.js";
+        pdfjsLib.PDFJS.disableWorker = true;
         var loadingTask = pdfjsLib.getDocument(pdfPath);
-        console.log(loadingTask);
 
         var PAGE_TO_VIEW = 1;
         var SCALE = 1.0;
@@ -341,7 +337,6 @@ export class Home  {
 
     //reset game to initial values
     replay(){
-        console.log("replay!!!")
         $("#name").css("z-index","3");
         $("#quest").css("z-index","2");
         $("#color").css("z-index","1");

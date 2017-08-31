@@ -38,7 +38,6 @@ export class QuestSelectComponent {
   }
 
   switchToColor(){
-    console.log('switching to rest...')
     this.switchRequest.emit();
   }
 

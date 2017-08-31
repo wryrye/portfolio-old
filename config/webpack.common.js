@@ -14,12 +14,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 
+// const GH_REPO_NAME = 'testWeb';
+
 /*
  * Webpack Constants
  */
 const METADATA = {
   title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
-  baseUrl: '/',
+  baseUrl: '/' + 'holy-grail' + '/' ,
   isDevServer: helpers.isWebpackDevServer()
 };
 

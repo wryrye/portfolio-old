@@ -32,7 +32,6 @@ export class NameSelectComponent {
   }
 
   switchToQuest(){
-    console.log('switching to quest...')
     this.switchRequest.emit();
 
   }

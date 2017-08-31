@@ -37,13 +37,11 @@ export class ColorSelectComponent {
     }
 
     selectColor(color){
-        console.log(this.quest)
-
         if(color =="launch"){
             this.launchKnight()
         }
         else{
-            $("#wrapper").css("cursor","url(../../../../assets/img/"+color+"sword.png), auto");
+            $("#wrapper").css("cursor","url(./assets/img/"+color+"sword.png), auto");
             if(this.quest == 'essay'){
                 this.switchToEssay();
 
@@ -59,20 +57,16 @@ export class ColorSelectComponent {
     }
 
     switchToResume(){
-        console.log('switching to resume...')
         this.resumeRequest.emit();
     }
 
     switchToEssay(){
-        console.log('switching to essay...')
         this.essayRequest.emit();
     }
     launchKnight(){
-        console.log('3..2..1.. launching!')
         this.launchRequest.emit();
     }
     switchToGrail(){
-        console.log('switching to essay...')
         this.grailRequest.emit();
     }
 
