@@ -1,3 +1,3 @@
 A subpar joke taken a bit too far...
 
-![Alt text](/screenshot.png?raw=true "Monty Python")
+![Alt text](/speedrun.gif?raw=true "Monty Python")
